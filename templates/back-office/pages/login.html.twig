@@ -1,0 +1,93 @@
+{% extends 'back-office/base.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block title %} {{ 'login.page_title' | trans }} {% endblock %}
+{% block bodyClass %} bg-gradient-primary{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .back-home, .back-home:hover {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bold;
+            display: inline-block;
+            font-family: "Century Gothic", sans-serif;
+        }
+
+        .bg-login-image {
+            background: url('{{ asset('assets/back-office/img/login.jpg')}}') 100% no-repeat;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('front.home') }}" class="back-home">{{ 'login.back_home' | trans }}</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h2 text-gray-900 mb-4">{{ 'login.title' | trans }}</h1>
+                                    </div>
+                                    {% if error %}
+                                        <div class="mt-0 pt-0 mb-3 text-center text-danger">
+                                            {{ error.messageKey | trans(error.messageData, 'security') }}
+                                        </div>
+                                    {% endif %}
+                                    <form class="user" action="{{ path('login') }}" method="post">
+                                        <div class="form-group">
+                                            <input type="email"
+                                                   class="form-control form-control-user"
+                                                   id="exampleInputEmail"
+                                                   aria-describedby="emailHelp"
+                                                   placeholder="{{ 'login.form.email.placeholder' | trans }}"
+                                                   name="_username"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password"
+                                                   class="form-control form-control-user"
+                                                   id="exampleInputPassword"
+                                                   placeholder="{{ 'login.form.password.placeholder' | trans }}"
+                                                   name="_password"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label mt-2" for="customCheck">
+                                                    {{ 'login.form.remember' | trans }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block mt-4">
+                                           {{ 'login.form.login_btn' | trans }}
+                                        </button>
+                                    </form>
+                                    <hr class="mt-5">
+                                    <h6 class="h6 text-gray-900 mb-4">{{ 'login.register.title' | trans }}</h6>
+                                    <div class="ml-3">
+                                        <a class="small" href="{{ path('register.member') }}">
+                                            {{ 'login.register.member' | trans }}
+                                        </a>
+                                    </div>
+                                    <div class="ml-3">
+                                        <a class="small" href="{{ path('register.candidate') }}">
+                                            {{ 'login.register.candidate' | trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

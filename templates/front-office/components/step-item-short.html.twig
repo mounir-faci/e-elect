@@ -1,0 +1,13 @@
+{% set delay = delay ? delay : '' %}
+{% set icon = icon ? icon : 'user' %}
+{% set title = title ? title : '' %}
+
+
+<div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ delay }}">
+    <div class="feature-1 text-center">
+        <div class="wrap-icon icon-1">
+            <span class="icon la la-{{ icon }}"></span>
+        </div>
+        <h3 class="mb-3">{{ title }}</h3>
+    </div>
+</div>

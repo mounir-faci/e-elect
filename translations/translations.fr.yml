@@ -1,0 +1,63 @@
+front:
+  brand: "e-Elect"
+  titles:
+    home: "e-elec | Accueil"
+    login: "e-elec | Connexion"
+  nav:
+    home: "Accueil"
+    login: "Connexion"
+  header:
+    text: "e-Elect, la plateforme qui vous permet de réaliser vos élections depuis chez vous en toute sécurité."
+    slogan: "Simple, Rapide, Efficace et Sécurisé."
+  footer:
+    about:
+      title: "A propos de %brand%"
+      text: "E-elect est une plateforme web conçu afin de faciliter les élections. Connectez-vous, votez et confirmer. Rien de plus simple."
+    admin:
+      title: "Administration"
+      text: "Se connecter à l'espace d'administration pour administrer la plateforme"
+    register:
+      title: "S'inscrire ?"
+      member: "Devenir membre par ici"
+      candidate: "Devenir candidat par ici"
+    copyright:
+      text: "&copy; Copyright SoftLand. Tous les droits sont réservés"
+      #credits: "Designed by <a href='https://bootstrapmade.com/'>BootstrapMade</a>"
+      credits: ""
+  main:
+    steps:
+      title: "Votez en seulement 3 étapes"
+      short:
+        connect: "Connectez vous"
+        vote: "Attribuez votre voix"
+        confirm: "Confirmez votre vote"
+      long:
+        connect:
+          title: "Connexion"
+          text: "Accéder à votre espace personnel, si vous n'êtes pas encore inscrit à la plateforme veuillez vous inscrir afin d'accéder à la liste des élections en cours et ainsi pouvoir attribuer votre voix pour votre candidat préféré"
+        vote:
+          title: "Le Vote"
+          text: "Une fois sur votre espace, accéder à la liste des élections en cours, choisissez celle qui vous intersse et choisissez votre candidat préféré, et attribuez-lui votre voix (vote). Cependant vous pouvez toujours modifier votre vote si vous ne l'avez pas confirmé."
+        confirm:
+          title: "Confirmation"
+          text: "Une fois que vous avez attribué votre voix vous devez confirmer votre choix. Cependant, une fois confirmé vous ne pouvez plus le modifier."
+    end_text: "Connectez vous, votez sur vote candidat préféré et confirmez votre vote."
+
+login:
+  page_title: "e-Elect | Connexion"
+  back_home: "Retour ..."
+  title: "Connexion à votre espace personnel"
+  form:
+    email:
+      placeholder: "Saisir vote adresse email ..."
+    password:
+      placeholder: "Saisir votre mot de passe ..."
+    remember: "Rester connecté"
+    login_btn: "Se conncecter"
+  register:
+    title: "Pas encore inscrit !"
+    member: "Devenir membre"
+    candidate: "Devenir candidat"
+
+back:
+  title: "e-Elect Dashboard"

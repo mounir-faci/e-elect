@@ -1,0 +1,43 @@
+{% trans_default_domain 'translations' %}
+{% extends 'front-office/components/layout.html.twig' %}
+
+{% block content %}
+
+    {# short steps #}
+    {% include 'front-office/components/steps.html.twig' %}
+
+    {# steps description #}
+    {%
+        include 'front-office/components/step-item-long.html.twig' with {
+            'order': '0',
+            'textPosition': 'left',
+            'title': 'front.main.steps.long.connect.title' | trans,
+            'description': 'front.main.steps.long.connect.text' | trans,
+            'imageUrl': asset('assets/front-office/img/connect.jpg')
+        }
+    %}
+
+    {%
+        include 'front-office/components/step-item-long.html.twig' with {
+            'order': '2',
+            'textPosition': 'right',
+            'title': 'front.main.steps.long.vote.title' | trans,
+            'description': 'front.main.steps.long.vote.text' | trans,
+            'imageUrl': asset('assets/front-office/img/vote.jpg')
+        }
+    %}
+
+    {%
+        include 'front-office/components/step-item-long.html.twig' with {
+            'order': '0',
+            'textPosition': 'left',
+            'title': 'front.main.steps.long.confirm.title' | trans,
+            'description': 'front.main.steps.long.confirm.text' | trans,
+            'imageUrl': asset('assets/front-office/img/confirm.jpg')
+        }
+    %}
+
+    {# slogan #}
+    {% include 'front-office/components/slogan.html.twig' with {'slogan': 'front.main.end_text' | trans } %}
+
+{% endblock %}

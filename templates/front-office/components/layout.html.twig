@@ -1,0 +1,22 @@
+{% extends 'front-office/base.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block title %}
+    {{ 'front.titles.home' | trans }}
+{% endblock %}
+
+{% block body %}
+    {# header #}
+    {% include 'front-office/components/header.html.twig' %}
+
+    {# content #}
+    <main id="main">
+    {% block content %}
+
+
+    {% endblock %}
+    </main>
+
+    {# footer #}
+    {% include 'front-office/components/footer.html.twig' %}
+{% endblock %}

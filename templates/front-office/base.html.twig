@@ -1,0 +1,43 @@
+{% trans_default_domain 'translations' %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>
+            {% block title %}
+                {{ 'front.brand' | trans }}
+            {% endblock %}
+        </title>
+        {# styles section #}
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/vendor/aos/aos.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/vendor/line-awesome/css/line-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/front-office/css/style.css') }}" rel="stylesheet">
+        {% block stylesheets %}
+
+        {% endblock %}
+    </head>
+    <body>
+        {# content section #}
+        {% block body %}
+
+        {% endblock %}
+
+        {# javascript section #}
+        <script src="{{ asset('assets/front-office/vendor/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/php-email-form/validate.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/aos/aos.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/front-office/vendor/jquery-sticky/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/front-office/js/main.js') }}"></script>
+        {% block javascripts %}
+
+        {% endblock %}
+    </body>
+</html>

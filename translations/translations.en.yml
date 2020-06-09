@@ -1,0 +1,24 @@
+front:
+  brand: "e-Elect"
+  titles:
+    home: "e-elec | Acceuil"
+    login: "e-elec | Connexion"
+
+  nav:
+    home: "Acceuil"
+    login: "Connexion"
+  footer:
+    about:
+      title: "About %brand%"
+      text: "e-elect est une plateforme web conçu afin de faciliter les elections. Connectez vous, votez et confirmer. Rien de plus simple."
+    admin:
+      title: "Administration"
+      text: "Se connecter à l'espace d'administration pour administrer la plateforme"
+    register:
+      title: "S'inscrire ?"
+      member: "Devenir membre par ici"
+      candidate: "Devenir condidat par ici"
+    copyright:
+      text: "&copy; Copyright SoftLand. All Rights Reserved"
+      credits: "Designed by <a href='https://bootstrapmade.com/'>BootstrapMade</a>"
+
