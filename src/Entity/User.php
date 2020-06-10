@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="user.email.exists"
+ * )
  */
 class User implements UserInterface
 {
@@ -25,22 +31,36 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="8", minMessage="user.password.length")
      */
-    private $firstname;
+    private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
+     * @Assert\Length(
+     *     min="3", minMessage="user.names.min_length",
+     *     max="50", maxMessage="user.names.max_length"
+     * )
      */
-    private $lastname;
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\Length(
+     *     min="3", minMessage="user.names.min_length",
+     *     max="50", maxMessage="user.names.max_length"
+     * )
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
 
     /**
      * @ORM\Column(type="boolean")
@@ -48,9 +68,13 @@ class User implements UserInterface
     private $active;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string $passwordConfirmation
+     * @Assert\EqualTo(
+     *     propertyPath="password",
+     *     message="user.password.confirm"
+     * )
      */
-    private $password;
+    private $passwordConfirmation;
 
     public function getId(): ?int
     {
@@ -59,14 +83,7 @@ class User implements UserInterface
 
     public function getUsername(): ?string
     {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
+        return $this->email;
     }
 
     public function getEmail(): ?string
@@ -81,26 +98,38 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFirstname(): ?string
+    public function getPassword(): ?string
     {
-        return $this->firstname;
+        return $this->password;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setPassword(string $password): self
     {
-        $this->firstname = $firstname;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->lastname;
+        return $this->firstName;
     }
 
-    public function setLastname(string $lastname): self
+    public function setFirstName(string $firstName): self
     {
-        $this->lastname = $lastname;
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
@@ -117,28 +146,32 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getPasswordConfirmation(): ?string
+    {
+        return $this->passwordConfirmation;
+    }
+
+    public function setPasswordConfirmation(string $passwordConfirmation): self
+    {
+        $this->passwordConfirmation = $passwordConfirmation;
+        return $this;
+    }
+
     public function getRoles()
     {
-        return [
-            self::ROLE_MEMBER,
-        ];
+        return $this->roles;
     }
 
-    public function getPassword(): ?string
+    public function setRoles(array $roles)
     {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
+        $this->roles = $roles;
 
         return $this;
     }
 
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return null;
     }
 
     public function eraseCredentials()

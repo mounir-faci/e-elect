@@ -59,5 +59,26 @@ login:
     member: "Devenir membre"
     candidate: "Devenir candidat"
 
+register:
+  title: "Création d'un compte !"
+  action: "Enregistrer mon compte"
+
+user:
+  email:
+    label: "Votre adresse email"
+    placeholder: "Saisir votre adresse email"
+  first_name:
+    label: "Votre prénom"
+    placeholder: "Saisir votre prénom"
+  last_name:
+    label: "Votre nom"
+    placeholder: "Saisir votre NOM"
+  password:
+    label: "Votre mot de passe"
+    placeholder: "Saisir votre mot de passe"
+  password_confirmation:
+    label: "Confirmez votre mot de passe"
+    placeholder: "Confirmez votre mot de passe"
+
 back:
   title: "e-Elect Dashboard"

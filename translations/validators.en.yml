@@ -1,0 +1,9 @@
+user:
+  names:
+    min_length: "Doit contenir au minimum 3 caractères"
+    max_length: "Doit contenir au maximum 50 caractères"
+  email:
+    exists: "Cet email est déjà utilisé"
+  password:
+    length: "Doit contenir au minimum 8 caractères"
+    confirm: "Les mots de passe saisis ne sont pas identiques"

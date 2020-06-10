@@ -1,0 +1,50 @@
+{% extends 'back-office/base.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block title %} {{ 'login.page_title' | trans }} {% endblock %}
+{% block bodyClass %} bg-gradient-primary{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .back-home, .back-home:hover {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bold;
+            display: inline-block;
+            font-family: "Century Gothic", sans-serif;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('front.home') }}" class="back-home">{{ 'login.back_home' | trans }}</a>
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">{{ 'register.title' | trans }}</h1>
+                        </div>
+                        {{ form_start(form, {'attr': {'class': 'user'}}) }}
+                            {{ form_row(form.firstName) }}
+                            {{ form_row(form.lastName) }}
+                            {{ form_row(form.email) }}
+                            {{ form_row(form.password) }}
+                            {{ form_row(form.passwordConfirmation) }}
+                            <div class="form-group mt-5">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    {{ 'register.action' | trans }}
+                                </button>
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
