@@ -14,38 +14,12 @@
     } %}
 
     {# Manage elections #}
-    {% include 'back-office/components/side-bar-item.html.twig' with {
-        'hasChildren': true,
-        'withDivider': true,
-        'heading': 'back.default.side_bar.election.heading' | trans,
-        'action': path('back.dashboard'),
-        'icon': 'medal',
-        'label': 'back.default.side_bar.election.label' | trans,
-        'children': [
-            {
-                'title': 'back.default.side_bar.election.group.title' | trans,
-                'items': [
-                {
-                    'action': path('back.dashboard'),
-                    'label': 'back.default.side_bar.election.group.items.new' | trans
-                },
-                {
-                    'action': path('back.dashboard'),
-                    'label': 'back.default.side_bar.election.group.items.pending' | trans
-                },
-                {
-                    'action': path('back.dashboard'),
-                    'label': 'back.default.side_bar.election.group.items.history' | trans
-                }
-            ]
-            }
-        ]
-    } %}
+    {% include 'back-office/shared/side-bar-menu-election.html.twig' %}
 
     {# Manage votes #}
     {% include 'back-office/components/side-bar-item.html.twig' with {
         'hasChildren': true,
-        'withDivider': true,
+        'withDivider': user.isCandidate or user.isAdministrator,
         'heading': 'back.default.side_bar.vote.heading' | trans,
         'action': path('back.dashboard'),
         'icon': 'crown',
@@ -68,16 +42,19 @@
     } %}
 
     {# Manage content #}
+    {% if user.isCandidate %}
     {% include 'back-office/components/side-bar-item.html.twig' with {
         'hasChildren': false,
-        'withDivider': true,
+        'withDivider': user.isAdministrator,
         'heading': 'back.default.side_bar.content.heading' | trans,
         'action': path('back.dashboard'),
         'icon': 'layer-group',
         'label': 'back.default.side_bar.content.label' | trans
     } %}
+    {% endif %}
 
     {# Manage users #}
+    {% if user.isAdministrator %}
     {% include 'back-office/components/side-bar-item.html.twig' with {
         'hasChildren': true,
         'withDivider': false,
@@ -110,6 +87,7 @@
             }
         ]
     } %}
+    {% endif %}
 
     {# Toggle button #}
     {% include 'back-office/components/side-bar-toggle-button.html.twig' %}

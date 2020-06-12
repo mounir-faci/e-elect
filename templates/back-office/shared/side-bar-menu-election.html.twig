@@ -1,0 +1,36 @@
+{%  trans_default_domain 'translations' %}
+{% set childrenItems = [
+    {
+        'action': path('back.dashboard'),
+        'label': 'back.default.side_bar.election.group.items.pending' | trans
+    },
+    {
+        'action': path('back.dashboard'),
+        'label': 'back.default.side_bar.election.group.items.history' | trans
+    }
+] %}
+
+{% if user.isAdministrator %}
+    {% set adminItems = [
+        {
+            'action': path('back.dashboard'),
+            'label': 'back.default.side_bar.election.group.items.new' | trans
+        }
+    ] %}
+    {% set childrenItems =  adminItems | merge(childrenItems) %}
+{% endif %}
+
+{% include 'back-office/components/side-bar-item.html.twig' with {
+    'hasChildren': true,
+    'withDivider': true,
+    'heading': 'back.default.side_bar.election.heading' | trans,
+    'action': path('back.dashboard'),
+    'icon': 'medal',
+    'label': 'back.default.side_bar.election.label' | trans,
+    'children': [
+        {
+            'title': 'back.default.side_bar.election.group.title' | trans,
+            'items': childrenItems
+        }
+    ]
+} %}
