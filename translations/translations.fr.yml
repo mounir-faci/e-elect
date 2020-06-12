@@ -82,3 +82,61 @@ user:
 
 back:
   title: "e-Elect Dashboard"
+  default:
+    pages:
+      heading: "Tableau de bord"
+    footer:
+      copyright: "Copyright &copy; e-elect"
+    logout:
+      title: "Deconnexion !"
+      text: "Cliquez sur \"Se déconnecter\" pour terminer votre session et quitter votre espace."
+      actions:
+        cancel: "Annuler"
+        logout: "Se déconnecter"
+    top_bar:
+      alerts:
+        title: "Centre d'aletes"
+        show_all: "Afficher toutes les alertes"
+        candidates: "Des nouveaux candidats sont en attente de validation <span class='badge badge-danger'>%count%</span>"
+        members: "Des nouveaux membres sont en attente de validation <span class='badge badge-danger'>%count%</span> "
+      user:
+        dropdown:
+          profile: "Mon profil"
+          logout: "Se déconnecter"
+    side_bar:
+      brand: "e-Elect"
+      dashboard:
+        label: "Tableau de bord"
+      users:
+        heading: "UTILISATEURS"
+        label: "Gérer les utilisateurs"
+        groups:
+          all:
+            title: "Gérer les utilisateurs"
+            items:
+              list: "Liste des utilisateurs"
+          roles:
+            title: "Gérer par rôle"
+            items:
+              members: "Liste des membres"
+              candidates: "Liste des candidats"
+      vote:
+        heading: "VOTES"
+        label: "Gérer mes votes"
+        group:
+          title: "Géstion des votes"
+          items:
+            pending: "Votes en cours"
+            history: "Historique des votes"
+      content:
+        heading: "CONDIDAT - PLAN D'ACTION -"
+        label: "Gérer le contenu"
+      election:
+        heading: "ELECTIONS"
+        label: "Gérer les élections"
+        group:
+          title: "Géstion des élections"
+          items:
+            new: "Ajouter une élection"
+            pending: "Élections en cours"
+            history: "Historique des élections"

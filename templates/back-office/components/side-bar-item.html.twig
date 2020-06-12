@@ -1,0 +1,45 @@
+{% set hasChildren = hasChildren is defined ? hasChildren : false %}
+{% set withDivider = withDivider is defined ? withDivider : false %}
+{% set action = action is defined ? action : path('back.dashboard') %}
+{% set icon = icon is defined ? icon : 'folder' %}
+{% set label = label is defined ? label : '' %}
+{% set children = children is defined ? children : [] %}
+{% set collapseId =  label | lower | replace({' ': '-'}) %}
+
+{% if heading is defined %}
+    <div class="sidebar-heading">{{ heading }}</div>
+{% endif %}
+
+<li class="nav-item">
+    {% if hasChildren %}
+        <a class="nav-link collapsed" href="{{ action }}" aria-expanded="true" aria-controls="collapse-{{ collapseId }}"
+           data-toggle="collapse" data-target="#collapse-{{ collapseId }}"
+        >
+            <i class="fas fa-fw fa-{{ icon }}"></i> <span>{{ label }}</span>
+        </a>
+    {% else %}
+        <a class="nav-link" href="{{ action }}">
+            <i class="fas fa-fw fa-{{ icon }}"></i> <span>{{ label }}</span>
+        </a>
+    {% endif %}
+
+    {% if hasChildren %}
+        <div id="collapse-{{ collapseId }}" class="collapse" aria-labelledby="heading-{{ collapseId }}"
+             data-parent="#accordionSidebar"
+        >
+            <div class="bg-white py-2 collapse-inner rounded">
+                {% for group in children %}
+                    <h6 class="collapse-header">{{ group.title }}</h6>
+                    {% for item in group.items %}
+                        <a class="collapse-item" href="{{ item.action }}">{{ item.label }}</a>
+                    {% endfor %}
+                    <div class="collapse-divider"></div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</li>
+
+{% if withDivider %}
+    <hr class="sidebar-divider">
+{% endif %}

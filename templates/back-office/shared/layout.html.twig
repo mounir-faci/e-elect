@@ -1,0 +1,31 @@
+{% extends 'back-office/base.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block body %}
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        {# side-bar #}
+        {% include 'back-office/components/side-bar.html.twig' %}
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                {# top-bar #}
+                {% include 'back-office/components/top-bar.html.twig' %}
+
+                <div class="container-fluid">
+                    {# page-heading #}
+                    {% include 'back-office/components/page-heading.html.twig' %}
+
+                    {# page-content #}
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+            {# footer #}
+            {% include 'back-office/components/footer.html.twig' %}
+        </div>
+    </div>
+    {# scroll to top button #}
+    {% include 'back-office/components/scroll-top-button.htm.twig' %}
+{% endblock %}

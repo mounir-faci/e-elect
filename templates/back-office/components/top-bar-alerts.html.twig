@@ -1,0 +1,29 @@
+{% trans_default_domain 'translations' %}
+
+<li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bell fa-fw"></i>
+        <span class="badge badge-danger badge-counter">29+</span>
+    </a>
+    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+         aria-labelledby="alertsDropdown">
+        <h6 class="dropdown-header">{{ 'back.default.top_bar.alerts.title' | trans }}</h6>
+
+        {% include 'back-office/components/top-bar-alert-item.html.twig' with {
+            'action': path('back.alerts.members'),
+            'text': 'back.default.top_bar.alerts.members' | trans({'%count%': 14})
+        } %}
+
+        {% include 'back-office/components/top-bar-alert-item.html.twig' with {
+            'action': path('back.alerts.candidates'),
+            'icon': 'user-graduate',
+            'iconBackground': 'gradient-info',
+            'text': 'back.default.top_bar.alerts.candidates' | trans({'%count%': 15})
+        } %}
+
+        <a class="dropdown-item text-center small text-gray-500" href="{{ path('back.alerts.all') }}">
+            {{ 'back.default.top_bar.alerts.show_all' | trans }}
+        </a>
+    </div>
+</li>

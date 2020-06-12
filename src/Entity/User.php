@@ -178,4 +178,19 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+
+    public function isMember(): bool
+    {
+        return in_array(self::ROLE_MEMBER, $this->getRoles());
+    }
+
+    public function isCandidate(): bool
+    {
+        return in_array(self::ROLE_CANDIDATE, $this->getRoles());
+    }
+
+    public function isAdministrator(): bool
+    {
+        return in_array(self::ROLE_ADMINISTRATOR, $this->getRoles());
+    }
 }

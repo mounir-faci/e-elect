@@ -1,0 +1,22 @@
+{% trans_default_domain 'translations' %}
+
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+    {# side-bar toggle (top-bar) #}
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    {# top-bar nav-bar #}
+    <ul class="navbar-nav ml-auto">
+        {# alerts #}
+        {% include 'back-office/components/top-bar-alerts.html.twig' %}
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        {# user information #}
+        {% include 'back-office/components/top-bar-user-information.html.twig' %}
+    </ul>
+</nav>
+
+{# logout modal #}
+{% include 'back-office/components/top-bar-logout-modal.html.twig' %}

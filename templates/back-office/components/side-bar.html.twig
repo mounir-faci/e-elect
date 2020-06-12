@@ -1,0 +1,116 @@
+{% trans_default_domain 'translations' %}
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    {# Brand #}
+    {% include 'back-office/components/side-bar-brand.html.twig' %}
+
+    {# Dashboard #}
+    {% include 'back-office/components/side-bar-item.html.twig' with {
+        'hasChildren': false,
+        'withDivider': true,
+        'action': path('back.dashboard'),
+        'icon': 'tachometer-alt',
+        'label': 'back.default.side_bar.dashboard.label' | trans
+    } %}
+
+    {# Manage elections #}
+    {% include 'back-office/components/side-bar-item.html.twig' with {
+        'hasChildren': true,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.election.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'medal',
+        'label': 'back.default.side_bar.election.label' | trans,
+        'children': [
+            {
+                'title': 'back.default.side_bar.election.group.title' | trans,
+                'items': [
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.election.group.items.new' | trans
+                },
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.election.group.items.pending' | trans
+                },
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.election.group.items.history' | trans
+                }
+            ]
+            }
+        ]
+    } %}
+
+    {# Manage votes #}
+    {% include 'back-office/components/side-bar-item.html.twig' with {
+        'hasChildren': true,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.vote.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'crown',
+        'label': 'back.default.side_bar.vote.label' | trans,
+        'children': [
+            {
+                'title': 'back.default.side_bar.vote.group.title' | trans,
+                'items': [
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.vote.group.items.pending' | trans
+                },
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.vote.group.items.history' | trans
+                }
+            ]
+            }
+        ]
+    } %}
+
+    {# Manage content #}
+    {% include 'back-office/components/side-bar-item.html.twig' with {
+        'hasChildren': false,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.content.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'layer-group',
+        'label': 'back.default.side_bar.content.label' | trans
+    } %}
+
+    {# Manage users #}
+    {% include 'back-office/components/side-bar-item.html.twig' with {
+        'hasChildren': true,
+        'withDivider': false,
+        'heading': 'back.default.side_bar.users.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'users-cog',
+        'label': 'back.default.side_bar.users.label' | trans,
+        'children': [
+            {
+                'title': 'back.default.side_bar.users.groups.roles.title' | trans,
+                'items': [
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.users.groups.roles.items.candidates' | trans
+                },
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.users.groups.roles.items.members' | trans
+                }
+            ]
+            },
+            {
+                'title': 'back.default.side_bar.users.groups.all.title' | trans,
+                'items': [
+                {
+                    'action': path('back.dashboard'),
+                    'label': 'back.default.side_bar.users.groups.all.items.list' | trans
+                }
+            ]
+            }
+        ]
+    } %}
+
+    {# Toggle button #}
+    {% include 'back-office/components/side-bar-toggle-button.html.twig' %}
+</ul>

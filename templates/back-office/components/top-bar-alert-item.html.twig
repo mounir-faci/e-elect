@@ -1,0 +1,17 @@
+{% set action = action is defined ? action : path('back.dashboard') %}
+{% set icon = icon is defined ? icon : 'user' %}
+{% set iconColor = iconColor is defined ? iconColor : 'white' %}
+{% set iconBackground = iconBackground is defined ? iconBackground : 'gradient-primary' %}
+{% set text = text is defined ? text : '' %}
+
+<a class="dropdown-item d-flex align-items-center" href="{{ action }}">
+    <div class="mr-3">
+        <div class="icon-circle bg-{{ iconBackground }}">
+            <i class="fas fa-{{ icon}} text-{{ iconColor }}"></i>
+        </div>
+    </div>
+    <div>
+        <div class="small text-gray-500">{{ 'now' | date('d M Y') }}</div>
+        <span class="font-weight-bold">{{ text | raw }}</span>
+    </div>
+</a>
