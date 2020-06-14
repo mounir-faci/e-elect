@@ -15,12 +15,12 @@
              aria-labelledby="alertsDropdown">
             <h6 class="dropdown-header">{{ 'back.default.top_bar.alerts.title' | trans }}</h6>
 
-            {% include 'back-office/components/top-bar-alert-item.html.twig' with {
+            {% include 'back-office/components/top-bar/top-bar-alert-item.html.twig' with {
                 'action': path('back.alerts.members'),
                 'text': 'back.default.top_bar.alerts.members' | trans({'%count%': members})
             } %}
 
-            {% include 'back-office/components/top-bar-alert-item.html.twig' with {
+            {% include 'back-office/components/top-bar/top-bar-alert-item.html.twig' with {
                 'action': path('back.alerts.candidates'),
                 'icon': 'user-graduate',
                 'iconBackground': 'gradient-info',

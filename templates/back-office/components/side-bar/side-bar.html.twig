@@ -2,10 +2,10 @@
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     {# Brand #}
-    {% include 'back-office/components/side-bar-brand.html.twig' %}
+    {% include 'back-office/components/side-bar/side-bar-brand.html.twig' %}
 
     {# Dashboard #}
-    {% include 'back-office/components/side-bar-item.html.twig' with {
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': false,
         'withDivider': true,
         'action': path('back.dashboard'),
@@ -14,10 +14,10 @@
     } %}
 
     {# Manage elections #}
-    {% include 'back-office/shared/side-bar-menu-election.html.twig' %}
+    {% include 'back-office/components/side-bar/side-bar-menu-election.html.twig' %}
 
     {# Manage votes #}
-    {% include 'back-office/components/side-bar-item.html.twig' with {
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': true,
         'withDivider': user.isCandidate or user.isAdministrator,
         'heading': 'back.default.side_bar.vote.heading' | trans,
@@ -43,7 +43,7 @@
 
     {# Manage content #}
     {% if user.isCandidate %}
-    {% include 'back-office/components/side-bar-item.html.twig' with {
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': false,
         'withDivider': user.isAdministrator,
         'heading': 'back.default.side_bar.content.heading' | trans,
@@ -55,7 +55,7 @@
 
     {# Manage users #}
     {% if user.isAdministrator %}
-    {% include 'back-office/components/side-bar-item.html.twig' with {
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': true,
         'withDivider': false,
         'heading': 'back.default.side_bar.users.heading' | trans,
@@ -90,5 +90,5 @@
     {% endif %}
 
     {# Toggle button #}
-    {% include 'back-office/components/side-bar-toggle-button.html.twig' %}
+    {% include 'back-office/components/side-bar/side-bar-toggle-button.html.twig' %}
 </ul>

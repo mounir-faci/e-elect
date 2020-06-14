@@ -20,7 +20,7 @@
     {% set childrenItems =  adminItems | merge(childrenItems) %}
 {% endif %}
 
-{% include 'back-office/components/side-bar-item.html.twig' with {
+{% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
     'hasChildren': true,
     'withDivider': true,
     'heading': 'back.default.side_bar.election.heading' | trans,
