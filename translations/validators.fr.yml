@@ -1,4 +1,6 @@
 user:
+  avatar:
+    mime_type: "Seuls les fichiers jpg/jpeg/png sont autorisés"
   names:
     min_length: "Doit contenir au minimum 3 caractères"
     max_length: "Doit contenir au maximum 50 caractères"

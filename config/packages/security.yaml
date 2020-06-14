@@ -18,10 +18,13 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: back.dashboard
+                always_use_default_target_path: true
             logout:
                 path: logout
                 target: front.home
-
+            remember_me:
+                secret: '%env(resolve:APP_SECRET)%'
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

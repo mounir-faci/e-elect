@@ -40,6 +40,12 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\File(mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage="user.avatar.mime_type")
+     */
+    private $avatar;
+
+    /**
      * @ORM\Column(type="string", length=50)
      * @Assert\Length(
      *     min="3", minMessage="user.names.min_length",
@@ -103,10 +109,21 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar): self
+    {
+        $this->avatar = $avatar;
         return $this;
     }
 
@@ -151,7 +168,7 @@ class User implements UserInterface
         return $this->passwordConfirmation;
     }
 
-    public function setPasswordConfirmation(string $passwordConfirmation): self
+    public function setPasswordConfirmation(?string $passwordConfirmation): self
     {
         $this->passwordConfirmation = $passwordConfirmation;
         return $this;

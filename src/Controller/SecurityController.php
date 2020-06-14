@@ -13,9 +13,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @var UserService $userService
-     */
     private $userService;
 
     public function __construct(UserService $userService)
@@ -34,6 +31,10 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        if ($this->getUser()) {
+            return $this->redirectToRoute('back.dashboard');
+        }
 
         return $this->render('back-office/pages/login.html.twig', [
             'last_username' => $lastUsername,
@@ -79,8 +80,9 @@ class SecurityController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->saveUser($user);
+            return $this->userService->authenticateUser($request, $user);
         }
         return $this->render('back-office/pages/register.html.twig', [
             'form' => $form->createView(),

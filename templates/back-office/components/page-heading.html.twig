@@ -1,7 +1,7 @@
 {% trans_default_domain 'translations' %}
 
-{% set title = title is defined ? title : 'back.default.pages.heading' | trans %}
+{% set title = title is defined ? title : 'back.default.pages.heading' %}
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>
+    <h1 class="h3 mb-0 text-gray-800">{{ title | trans }}</h1>
 </div>

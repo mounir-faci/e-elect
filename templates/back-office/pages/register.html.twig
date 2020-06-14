@@ -31,6 +31,7 @@
                             <h1 class="h4 text-gray-900 mb-4">{{ 'register.title' | trans }}</h1>
                         </div>
                         {{ form_start(form, {'attr': {'class': 'user'}}) }}
+                            {{ form_row(form.avatar) }}
                             {{ form_row(form.firstName) }}
                             {{ form_row(form.lastName) }}
                             {{ form_row(form.email) }}
@@ -47,4 +48,12 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $
+        });
+    </script>
 {% endblock %}

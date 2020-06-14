@@ -1,0 +1,76 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block stylesheets %}
+    <style>
+        .avatar-container {
+            max-width: 62px;
+            max-height: 62px;
+            border-radius: 50%;
+            border: 1px solid #d0d0d0;
+        }
+        .avatar-container img {
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-body p-0">
+            <div class="row">
+                <div class="col p-5">
+                    {{ form_start(form, {'attr': {'class': 'user'}}) }}
+                    <div class="row justify-content-between">
+                        <div class="avatar-container">
+                            <img id="user-avatar-img" width="60px" height="60px"
+                                 src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="user">
+                        </div>
+                        <div class="col mt-3">{{ form_row(form.avatar) }}</div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.firstName) }}
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.lastName) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.email) }}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.password) }}
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            {{ form_row(form.passwordConfirmation) }}
+                        </div>
+                    </div>
+                    <div class="form-group mt-5">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            {{ 'back.default.pages.profile.action' | trans }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#user_avatar").on('change', function (event) {
+                $(".custom-file-label").html(event.target.files[0].name);
+
+                let fr = new FileReader();
+                fr.readAsDataURL(this.files[0]);
+                fr.onloadend = function(e){
+                    let bin = e.target.result;
+                    $("#user-avatar-img").attr("src", bin);
+                }
+            });
+        });
+    </script>
+{% endblock %}

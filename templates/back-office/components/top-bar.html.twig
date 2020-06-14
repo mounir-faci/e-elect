@@ -9,9 +9,13 @@
     {# top-bar nav-bar #}
     <ul class="navbar-nav ml-auto">
         {# alerts #}
-        {% include 'back-office/components/top-bar-alerts.html.twig' %}
-
-        <div class="topbar-divider d-none d-sm-block"></div>
+        {% if user.isAdministrator and notification is not null %}
+            {% include 'back-office/components/top-bar-alerts.html.twig' with {
+                'total': notification.total,
+                'members': notification.members,
+                'candidates': notification.candidates,
+            }%}
+        {% endif %}
 
         {# user information #}
         {% include 'back-office/components/top-bar-user-information.html.twig' %}

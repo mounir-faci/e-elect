@@ -64,6 +64,9 @@ register:
   action: "Enregistrer mon compte"
 
 user:
+  avatar:
+    label: " "
+    placeholder: "Chosir un avatar"
   email:
     label: "Votre adresse email"
     placeholder: "Saisir votre adresse email"
@@ -85,6 +88,9 @@ back:
   default:
     pages:
       heading: "Tableau de bord"
+      profile:
+        heading: "Edition de mon profil"
+        action: "Mette à jour mes informations"
     footer:
       copyright: "Copyright &copy; e-elect"
     logout:
@@ -140,3 +146,4 @@ back:
             new: "Ajouter une élection"
             pending: "Élections en cours"
             history: "Historique des élections"
+
