@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\UserRepository;
@@ -81,6 +83,16 @@ class User implements UserInterface
      * )
      */
     private $passwordConfirmation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="candidate")
+     */
+    private $votes;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -209,5 +221,36 @@ class User implements UserInterface
     public function isAdministrator(): bool
     {
         return in_array(self::ROLE_ADMINISTRATOR, $this->getRoles());
+    }
+
+    /**
+     * @return Collection|Vote[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getCandidate() === $this) {
+                $vote->setCandidate(null);
+            }
+        }
+
+        return $this;
     }
 }

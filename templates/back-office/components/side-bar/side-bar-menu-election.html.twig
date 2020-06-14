@@ -1,11 +1,11 @@
 {%  trans_default_domain 'translations' %}
 {% set childrenItems = [
     {
-        'action': path('back.dashboard'),
+        'action': path('back.elections.pending'),
         'label': 'back.default.side_bar.election.group.items.pending' | trans
     },
     {
-        'action': path('back.dashboard'),
+        'action': path('back.elections.all'),
         'label': 'back.default.side_bar.election.group.items.history' | trans
     }
 ] %}
@@ -13,7 +13,7 @@
 {% if user.isAdministrator %}
     {% set adminItems = [
         {
-            'action': path('back.dashboard'),
+            'action': path('back.elections.add'),
             'label': 'back.default.side_bar.election.group.items.new' | trans
         }
     ] %}
