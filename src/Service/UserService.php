@@ -99,4 +99,41 @@ class UserService
         $this->persistUser($userBdd);
         return $userBdd;
     }
+
+    public function getUsers (): array
+    {
+        return $this->userRepository->findAll();
+    }
+
+    public function getUsersByStatus (bool $active): array
+    {
+        return $this->userRepository->findBy([
+            'active' => $active
+        ]);
+    }
+
+    public function getUsersByRole (string $role): array
+    {
+        $queryBuilder = $this->userRepository->createQueryBuilder('user');
+        $queryBuilder
+            ->select('user')
+            ->where('user.roles LIKE :role')
+            ->setParameter('role', '%'.$role.'%')
+        ;
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function changeUserStatus(int $userId, bool $active)
+    {
+        $queryBuilder = $this->userRepository->createQueryBuilder('user');
+        $queryBuilder
+            ->update(User::class, 'user')
+            ->set('user.active', ':active')
+            ->where('user.id = :id')
+            ->setParameter('active', $active)
+            ->setParameter('id', $userId)
+        ;
+
+        $queryBuilder->getQuery()->execute();
+    }
 }
