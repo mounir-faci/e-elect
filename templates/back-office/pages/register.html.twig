@@ -14,6 +14,7 @@
             display: inline-block;
             font-family: "Century Gothic", sans-serif;
         }
+
         .uppercase {
             text-transform: uppercase;
         }
@@ -31,17 +32,23 @@
                             <h1 class="h4 text-gray-900 mb-4">{{ 'register.title' | trans }}</h1>
                         </div>
                         {{ form_start(form, {'attr': {'class': 'user'}}) }}
-                            {{ form_row(form.avatar) }}
-                            {{ form_row(form.firstName) }}
-                            {{ form_row(form.lastName) }}
-                            {{ form_row(form.email) }}
-                            {{ form_row(form.password) }}
-                            {{ form_row(form.passwordConfirmation) }}
-                            <div class="form-group mt-5">
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    {{ 'register.action' | trans }}
-                                </button>
+                        <div class="row justify-content-between mb-3">
+                            <div class="avatar-container">
+                                <img id="user-avatar-img" width="60px" height="60px"
+                                     src="{{ asset('uploads/avatars/avatar-default.png') }}" alt="user">
                             </div>
+                            <div class="col mt-3">{{ form_row(form.avatar) }}</div>
+                        </div>
+                        {{ form_row(form.firstName) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.password) }}
+                        {{ form_row(form.passwordConfirmation) }}
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                {{ 'register.action' | trans }}
+                            </button>
+                        </div>
                         {{ form_end(form) }}
                     </div>
                 </div>
@@ -53,7 +60,16 @@
 {% block javascripts %}
     <script type="text/javascript">
         $(document).ready(function () {
-            $
+            $("#user_avatar").on('change', function (event) {
+                $(".custom-file-label").html(event.target.files[0].name);
+
+                let fr = new FileReader();
+                fr.readAsDataURL(this.files[0]);
+                fr.onloadend = function (e) {
+                    let bin = e.target.result;
+                    $("#user-avatar-img").attr("src", bin);
+                }
+            });
         });
     </script>
 {% endblock %}
