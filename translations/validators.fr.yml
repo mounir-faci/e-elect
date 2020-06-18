@@ -9,3 +9,7 @@ user:
   password:
     length: "Doit contenir au minimum 8 caractères"
     confirm: "Les mots de passe saisis ne sont pas identiques"
+election:
+  length:
+    min: "Ce champ doit avoir au minimum 10 caracteres"
+    max: "Ce champ doit avoir au maximum 255 caracteres"

@@ -1,0 +1,109 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block content %}
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-body p-0">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="data-table" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{ 'common.id' | trans }}</th>
+                                <th>{{ 'election.name.cell' | trans }}</th>
+                                <th>{{ 'election.start_date.cell' | trans }}</th>
+                                <th>{{ 'election.end_date.cell' | trans }}</th>
+                                <th>{{ 'election.status.cell' | trans }}</th>
+                                <th class="text-center">{{ 'common.actions' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {# @var election \App\Entity\Election #}
+                            {% for election in elections %}
+                                <tr>
+                                    <td class="text-center">{{ election.id }}</td>
+                                    <td>{{ election.name }}</td>
+                                    <td>{{ election.startDate | date('d/m/Y') }}</td>
+                                    <td>{{ election.endDate | date('d/m/Y') }}</td>
+                                    <td><span class="badge badge-info bg_{{ election.status | lower }}">{{ election.status }}</span></td>
+                                    <td>
+                                        <div class="d-flex justify-content-center m-0 p-0">
+                                            <a class="d-block btn btn-sm btn-circle btn-info mr-3"
+                                               href="{{ path('back.elections.show', {'election': election.id}) }}"
+                                            >
+                                                <i class="fas fa-burn"></i>
+                                            </a>
+
+                                            <a class="d-block btn btn-sm btn-circle btn-primary mr-3"
+                                               href="{{ path('back.elections.edit', {'election': election.id}) }}"
+                                            >
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            {% if election.status is constant('\\App\\Entity\\Election::STATUS_PENDING') %}
+                                                <form class="text-center" method="post"
+                                                      action="{{ path('back.elections.end') }}">
+                                                    <input type="hidden" name="csrf_token"
+                                                           value="{{ csrf_token('change_election_status') }}"/>
+                                                    <input type="hidden" name="election" value="{{ election.id }}"/>
+                                                    <button type="submit" class="btn btn-sm btn-circle btn-danger">
+                                                        <i class="fas fa-cloud-download-alt"></i>
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <form class="text-center" method="post"
+                                                      action="{{ path('back.elections.publish') }}">
+                                                    <input type="hidden" name="csrf_token"
+                                                           value="{{ csrf_token('change_election_status') }}"/>
+                                                    <input type="hidden" name="election" value="{{ election.id }}"/>
+                                                    <button type="submit" class="btn btn-sm btn-circle btn-success">
+                                                        <i class="fas fa-cloud-upload-alt"></i>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        thead th { border-bottom: 0 !important; }
+        .card-body { font-size: 14px !important; }
+        .bg_status_created { background-color: #18aa75; }
+        .bg_status_pending { background-color: #2e55c7; }
+        .bg_status_finished { background-color: #e1a712; }
+
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#data-table").DataTable({
+                "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+                "language": {
+                    "lengthMenu": "{{ 'datatable.length_menu' | trans }}",
+                    "search": "{{ 'datatable.search' | trans }}",
+                    "searchPlaceholder": "{{ 'datatable.search_placeholder' | trans }}",
+                    "zeroRecords": "{{ 'datatable.zero_records' | trans }}",
+                    "info": "{{ 'datatable.info' | trans }}",
+                    "infoFiltered": "{{ 'datatable.info_filtered' | trans }}",
+                    "paginate": {
+                        "next": "{{ 'datatable.paginate.next' | trans }}",
+                        "previous": "{{ 'datatable.paginate.previous' | trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

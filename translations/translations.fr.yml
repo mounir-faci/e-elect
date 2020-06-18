@@ -1,4 +1,5 @@
 common:
+  id: "#"
   access_denied: "Vous n'est pas autorisé à réaliser cette action"
   actions: "Actions"
   status:
@@ -110,6 +111,32 @@ user:
   password_confirmation:
     label: "Confirmez votre mot de passe"
     placeholder: "Confirmez votre mot de passe"
+election:
+  name:
+    cell: "Nom"
+    label: "Nom de l'éléction"
+    placeholder: "Saisir le nom de l'élection"
+  description:
+    cell: "Description"
+    label: "Description de l'éléction"
+    placeholder: "Saisir la description de l'élection"
+  start_date:
+    cell: "Date de début"
+    label: "Date de début de l'élection"
+    placeholder: "Selectionner la date de début de l'élection"
+  end_date:
+    cell: "Date de fin"
+    label: "Date de fin de l'élection"
+    placeholder: "Selectionner la date de fin de l'élection"
+  status:
+    cell: "Statut"
+    label: "Le statut de l'élection"
+    created: "Création"
+    pending: "En cours"
+    finished: "Términé"
+  actions:
+    add: "Ajouter l'élection"
+    update: "Soumettre et mette à jour l'élection"
 
 back:
   title: "e-Elect Dashboard"

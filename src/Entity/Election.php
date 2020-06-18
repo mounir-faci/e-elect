@@ -6,6 +6,7 @@ use App\Repository\ElectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ElectionRepository::class)
@@ -25,11 +26,19 @@ class Election
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min="10", minMessage="election.length.min",
+     *     max="255", maxMessage="election.length.max"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *     min="10", minMessage="election.length.min",
+     *     max="255", maxMessage="election.length.max"
+     * )
      */
     private $description;
 

@@ -1,0 +1,42 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block content %}
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-body p-0">
+            <div class="card shadow">
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.startDate) }}
+                    {{ form_row(form.endDate) }}
+                    {{ form_row(form.status) }}
+
+                    {% if not isEdition %}
+                        <button type="submit" class="btn btn-success float-lg-right mt-5 pl-4 pr-4">
+                            <i class="fa fa-plus-circle"></i> {{ 'election.actions.add' | trans }}
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary float-lg-right mt-5 pl-4 pr-4">
+                            <i class="fa fa-edit"></i> {{ 'election.actions.update' | trans }}
+                        </button>
+                    {% endif %}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                todayHighlight: true,
+                orientation: 'bottom'
+            });
+        });
+    </script>
+{% endblock %}
