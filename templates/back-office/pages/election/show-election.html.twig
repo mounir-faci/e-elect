@@ -2,14 +2,72 @@
 {% trans_default_domain 'translations' %}
 
 {% block content %}
-    <div class="card o-hidden border-0 shadow-lg">
+    {# general information #}
+    <div class="card o-hidden border-left-primary shadow-lg">
         <div class="card-body p-0">
             <div class="card shadow">
+                <div class="card-header">
+                    <h5 class="card-title">{{ 'back.default.pages.elections.show.general_information' | trans }}</h5>
+                </div>
                 <div class="card-body">
+                    <div class="row m-1">
+                        <div class="col-4">
+                            <span class="text-bold">{{ 'election.name.label' | trans }} : </span>
+                            <span>{{ election.name }}</span>
+                        </div>
+                        <div class="col-4">
+                            <span class="text-bold">{{ 'election.start_date.label' | trans }} : </span>
+                            <span>{{ election.startDate | date ('d-m-Y') }}</span>
+                        </div>
+                        <div class="col-4">
+                            <span class="text-bold">{{ 'election.end_date.label' | trans }} : </span>
+                            <span>{{ election.endDate  | date ('d-m-Y') }}</span>
+                        </div>
+                    </div>
+                    <div class="row m-1 mt-3">
+                        <div class="col">
+                            <span class="text-bold">{{ 'election.description.label' | trans }} : </span>
+                            <p class="m-2">{{ election.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    {# applications list #}
+    <div class="card o-hidden border-left-primary shadow-lg mt-5">
+        <div class="card-body p-0">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h5 class="card-title">{{ 'back.default.pages.elections.show.applications_list' | trans }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {# @var application \App\Entity\Application #}
+                        {% for application in election.applications %}
+                            {% include 'back-office/components/candidate-card.html.twig' with {
+                                'applicationId': application.id,
+                                'candidateFirstName': application.candidate.firstName,
+                                'candidateLastName': application.candidate.lastName,
+                                'candidateAvatar': application.candidate.avatar,
+                                'totalElectionVotes': election.totalVotesCount,
+                                'totalApplicationVotes': application.votes.count
+                            } %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .text-bold {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
 

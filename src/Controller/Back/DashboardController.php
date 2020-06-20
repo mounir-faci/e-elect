@@ -4,8 +4,8 @@ namespace App\Controller\Back;
 
 use App\Entity\User;
 use App\Service\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
@@ -18,7 +18,7 @@ class DashboardController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER') or is_granted('ROLE_CANDIDATE')")
+     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
      * @Route("/dashboard", name="back.dashboard")
      */
     public function home()

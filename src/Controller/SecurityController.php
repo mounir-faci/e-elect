@@ -51,32 +51,17 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/register/member", name="register.member")
+     * @Route("/register", name="register")
      * @param Request $request
      * @return Response
      */
-    public function registerMember(Request $request): Response
-    {
-        return $this->register($request, [User::ROLE_MEMBER]);
-    }
-
-    /**
-     * @Route("/register/candidate", name="register.candidate")
-     * @param Request $request
-     * @return Response
-     */
-    public function registerCandidate(Request $request): Response
-    {
-        return $this->register($request, [User::ROLE_CANDIDATE]);
-    }
-
-    private function register(Request $request, array $roles): Response
+    public function register(Request $request): Response
     {
         $user = new User();
         $user
             ->setLastName(strtoupper($user->getLastName()))
-            ->setRoles($roles)
-            ->setActive(false);
+            ->setRoles([User::ROLE_MEMBER])
+            ->setActive(true);
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 

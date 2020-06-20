@@ -27,7 +27,7 @@ class Vote
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="votes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $member;
+    private $voter;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,10 +45,10 @@ class Vote
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Election::class, inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="votes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $election;
+    private $application;
 
     public function getId(): ?int
     {
@@ -67,14 +67,14 @@ class Vote
         return $this;
     }
 
-    public function getMember(): ?User
+    public function getVoter(): ?User
     {
-        return $this->member;
+        return $this->voter;
     }
 
-    public function setMember(?User $member): self
+    public function setVoter(?User $voter): self
     {
-        $this->member = $member;
+        $this->voter = $voter;
 
         return $this;
     }
@@ -115,14 +115,14 @@ class Vote
         return $this;
     }
 
-    public function getElection(): ?Election
+    public function getApplication(): ?Application
     {
-        return $this->election;
+        return $this->application;
     }
 
-    public function setElection(?Election $election): self
+    public function setApplication(?Application $application): self
     {
-        $this->election = $election;
+        $this->application = $application;
 
         return $this;
     }

@@ -28,7 +28,7 @@ class ElectionController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER') or is_granted('ROLE_CANDIDATES')")
+     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
      * @Route("user/elections/pending", name="back.elections.pending", methods={"GET"})
      */
     public function pending(): Response
@@ -45,7 +45,7 @@ class ElectionController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER') or is_granted('ROLE_CANDIDATES')")
+     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
      * @Route("user/elections/all", name="back.elections.all", methods={"GET"})
      */
     public function all(): Response
@@ -53,7 +53,6 @@ class ElectionController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        // todo get elections
         return $this->render('back-office/pages/election/list-elections.html.twig', [
             'title' => 'back.default.pages.elections.list.heading',
             'user' => $user,
@@ -63,7 +62,7 @@ class ElectionController extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER') or is_granted('ROLE_CANDIDATES')")
+     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
      * @Route("user/elections/show/{election}", name="back.elections.show", methods={"GET"})
      * @param Election $election
      * @return Response

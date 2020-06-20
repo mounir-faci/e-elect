@@ -26,6 +26,9 @@ front:
   nav:
     home: "Accueil"
     login: "Connexion"
+    others: "Autres"
+    dashboard: "Espace personnel"
+    logout: "Déconnexion"
   header:
     text: "e-Elect, la plateforme qui vous permet de réaliser vos élections depuis chez vous en toute sécurité."
     slogan: "Simple, Rapide, Efficace et Sécurisé."
@@ -134,6 +137,8 @@ election:
     created: "Création"
     pending: "En cours"
     finished: "Términé"
+  application_count:
+    cell: "Candidatures"
   actions:
     add: "Ajouter l'élection"
     update: "Soumettre et mette à jour l'élection"
@@ -149,6 +154,8 @@ back:
       elections:
         show:
           heading: "Détails d'une élection"
+          general_information: "Informations générales"
+          applications_list: "Liste des candidatures"
         list:
           heading: "Liste de toutes les élections"
         pending:
@@ -157,7 +164,6 @@ back:
           heading: "Ajouter une nouvelle élection"
         edit:
           heading: "Mise de d'une élection"
-
       users:
         list:
           heading: "Liste de tous les utilisateurs"
@@ -199,7 +205,7 @@ back:
             title: "Gérer par rôle"
             items:
               members: "Liste des membres"
-              candidates: "Liste des candidats"
+              administrators: "Liste des administrateurs"
       vote:
         heading: "VOTES"
         label: "Gérer mes votes"
@@ -208,9 +214,9 @@ back:
           items:
             pending: "Votes en cours"
             history: "Historique des votes"
-      content:
-        heading: "CONDIDAT - PLAN D'ACTION -"
-        label: "Gérer le contenu"
+      applications:
+        heading: "CONDIDATURES - PLANS D'ACTION -"
+        label: "Gérer les candidatures"
       election:
         heading: "ELECTIONS"
         label: "Gérer les élections"

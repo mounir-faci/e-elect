@@ -14,7 +14,8 @@
                                 <th>{{ 'election.name.cell' | trans }}</th>
                                 <th>{{ 'election.start_date.cell' | trans }}</th>
                                 <th>{{ 'election.end_date.cell' | trans }}</th>
-                                <th>{{ 'election.status.cell' | trans }}</th>
+                                <th class="text-center">{{ 'election.status.cell' | trans }}</th>
+                                <th class="text-center">{{ 'election.application_count.cell' | trans }}</th>
                                 <th class="text-center">{{ 'common.actions' | trans }}</th>
                             </tr>
                             </thead>
@@ -26,7 +27,12 @@
                                     <td>{{ election.name }}</td>
                                     <td>{{ election.startDate | date('d/m/Y') }}</td>
                                     <td>{{ election.endDate | date('d/m/Y') }}</td>
-                                    <td><span class="badge badge-info bg_{{ election.status | lower }}">{{ election.status }}</span></td>
+                                    <td class="text-center">
+                                        <span class="badge badge-info bg_{{ election.status | lower }}">{{ election.status }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge badge-success">{{ election.totalVotesCount }}</span>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-center m-0 p-0">
                                             <a class="d-block btn btn-sm btn-circle btn-info mr-3"
@@ -34,32 +40,33 @@
                                             >
                                                 <i class="fas fa-burn"></i>
                                             </a>
-
-                                            <a class="d-block btn btn-sm btn-circle btn-primary mr-3"
-                                               href="{{ path('back.elections.edit', {'election': election.id}) }}"
-                                            >
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            {% if election.status is constant('\\App\\Entity\\Election::STATUS_PENDING') %}
-                                                <form class="text-center" method="post"
-                                                      action="{{ path('back.elections.end') }}">
-                                                    <input type="hidden" name="csrf_token"
-                                                           value="{{ csrf_token('change_election_status') }}"/>
-                                                    <input type="hidden" name="election" value="{{ election.id }}"/>
-                                                    <button type="submit" class="btn btn-sm btn-circle btn-danger">
-                                                        <i class="fas fa-cloud-download-alt"></i>
-                                                    </button>
-                                                </form>
-                                            {% else %}
-                                                <form class="text-center" method="post"
-                                                      action="{{ path('back.elections.publish') }}">
-                                                    <input type="hidden" name="csrf_token"
-                                                           value="{{ csrf_token('change_election_status') }}"/>
-                                                    <input type="hidden" name="election" value="{{ election.id }}"/>
-                                                    <button type="submit" class="btn btn-sm btn-circle btn-success">
-                                                        <i class="fas fa-cloud-upload-alt"></i>
-                                                    </button>
-                                                </form>
+                                            {% if user.administrator %}
+                                                <a class="d-block btn btn-sm btn-circle btn-primary mr-3"
+                                                   href="{{ path('back.elections.edit', {'election': election.id}) }}"
+                                                >
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                {% if election.status is constant('\\App\\Entity\\Election::STATUS_PENDING') %}
+                                                    <form class="text-center" method="post"
+                                                          action="{{ path('back.elections.end') }}">
+                                                        <input type="hidden" name="csrf_token"
+                                                               value="{{ csrf_token('change_election_status') }}"/>
+                                                        <input type="hidden" name="election" value="{{ election.id }}"/>
+                                                        <button type="submit" class="btn btn-sm btn-circle btn-danger">
+                                                            <i class="fas fa-cloud-download-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                {% else %}
+                                                    <form class="text-center" method="post"
+                                                          action="{{ path('back.elections.publish') }}">
+                                                        <input type="hidden" name="csrf_token"
+                                                               value="{{ csrf_token('change_election_status') }}"/>
+                                                        <input type="hidden" name="election" value="{{ election.id }}"/>
+                                                        <button type="submit" class="btn btn-sm btn-circle btn-success">
+                                                            <i class="fas fa-cloud-upload-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
                                             {% endif %}
                                         </div>
                                     </td>
@@ -76,11 +83,25 @@
 
 {% block stylesheets %}
     <style>
-        thead th { border-bottom: 0 !important; }
-        .card-body { font-size: 14px !important; }
-        .bg_status_created { background-color: #18aa75; }
-        .bg_status_pending { background-color: #2e55c7; }
-        .bg_status_finished { background-color: #e1a712; }
+        thead th {
+            border-bottom: 0 !important;
+        }
+
+        .card-body {
+            font-size: 14px !important;
+        }
+
+        .bg_status_created {
+            background-color: #18aa75;
+        }
+
+        .bg_status_pending {
+            background-color: #2e55c7;
+        }
+
+        .bg_status_finished {
+            background-color: #e1a712;
+        }
 
     </style>
 {% endblock %}

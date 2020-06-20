@@ -6,14 +6,14 @@ namespace App\Controller\Back;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Service\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER') or is_granted('ROLE_CANDIDATE')")
+ * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
  */
 class ProfileController extends AbstractController
 {
@@ -23,7 +23,7 @@ class ProfileController extends AbstractController
      * @param UserService $userService
      * @return Response
      */
-    public function edit (Request $request, UserService $userService): Response
+    public function edit(Request $request, UserService $userService): Response
     {
         /** @var User $user */
         $user = $this->getUser();

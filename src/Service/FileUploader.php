@@ -43,6 +43,6 @@ class FileUploader
 
     public function uploadAvatar(UploadedFile $file)
     {
-       return  $this->upload($file, 'avatar', $this->parameterBag->get(self::AVATAR_DIRECTORY_PARAM_NAME));
+        return $this->upload($file, 'avatar', $this->parameterBag->get(self::AVATAR_DIRECTORY_PARAM_NAME));
     }
 }

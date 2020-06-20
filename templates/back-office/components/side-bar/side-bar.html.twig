@@ -19,7 +19,7 @@
     {# Manage votes #}
     {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': true,
-        'withDivider': user.isCandidate or user.isAdministrator,
+        'withDivider': true,
         'heading': 'back.default.side_bar.vote.heading' | trans,
         'action': path('back.dashboard'),
         'icon': 'crown',
@@ -41,17 +41,15 @@
         ]
     } %}
 
-    {# Manage content #}
-    {% if user.isCandidate %}
+    {# Manage application #}
     {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
         'hasChildren': false,
         'withDivider': user.isAdministrator,
-        'heading': 'back.default.side_bar.content.heading' | trans,
+        'heading': 'back.default.side_bar.applications.heading' | trans,
         'action': path('back.dashboard'),
         'icon': 'layer-group',
-        'label': 'back.default.side_bar.content.label' | trans
+        'label': 'back.default.side_bar.applications.label' | trans
     } %}
-    {% endif %}
 
     {# Manage users #}
     {% if user.isAdministrator %}
@@ -67,12 +65,12 @@
                 'title': 'back.default.side_bar.users.groups.roles.title' | trans,
                 'items': [
                 {
-                    'action': path('back.users.candidates'),
-                    'label': 'back.default.side_bar.users.groups.roles.items.candidates' | trans
-                },
-                {
                     'action': path('back.users.members'),
                     'label': 'back.default.side_bar.users.groups.roles.items.members' | trans
+                },
+                {
+                    'action': path('back.users.administrators'),
+                    'label': 'back.default.side_bar.users.groups.roles.items.administrators' | trans
                 }
             ]
             },

@@ -20,7 +20,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     public const ROLE_MEMBER = 'ROLE_MEMBER';
-    public const ROLE_CANDIDATE = 'ROLE_CANDIDATE';
     public const ROLE_ADMINISTRATOR = 'ROLE_ADMINISTRATOR';
 
     /**
@@ -85,13 +84,19 @@ class User implements UserInterface
     private $passwordConfirmation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="candidate")
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="voter")
      */
     private $votes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="candidate")
+     */
+    private $applications;
 
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,24 +213,6 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 
-    public function isMember(): bool
-    {
-        return in_array(self::ROLE_MEMBER, $this->getRoles());
-    }
-
-    public function isCandidate(): bool
-    {
-        return in_array(self::ROLE_CANDIDATE, $this->getRoles());
-    }
-
-    public function isAdministrator(): bool
-    {
-        return in_array(self::ROLE_ADMINISTRATOR, $this->getRoles());
-    }
-
-    /**
-     * @return Collection|Vote[]
-     */
     public function getVotes(): Collection
     {
         return $this->votes;
@@ -252,5 +239,43 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getCandidate() === $this) {
+                $application->setCandidate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isMember(): bool
+    {
+        return in_array(self::ROLE_MEMBER, $this->getRoles());
+    }
+
+    public function isAdministrator(): bool
+    {
+        return in_array(self::ROLE_ADMINISTRATOR, $this->getRoles());
     }
 }

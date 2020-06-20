@@ -1,0 +1,42 @@
+{% set applicationId = applicationId is defined ? applicationId : 0 %}
+{% set candidateFirstName = candidateFirstName is defined ? candidateFirstName : '' %}
+{% set candidateLastName = candidateLastName is defined ? candidateLastName : '' %}
+{% set candidateAvatar =  candidateAvatar is defined ? candidateAvatar : 'avatar-default.png' %}
+{% set totalElectionVotes = totalElectionVotes is defined or totalElectionVotes == 0 ? totalElectionVotes : 1 %}
+{% set totalApplicationVotes = totalApplicationVotes is defined ? totalApplicationVotes : 0 %}
+{% set ratio = (totalApplicationVotes / totalElectionVotes * 100) | number_format(2) %}
+
+<a class="d-block text-decoration-none col-12 col-md-6 col-lg-4 col-xl-3 mb-4" href="{{ path('back.user.application', {'application': applicationId}) }}">
+    <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{ candidateFirstName ~ ' ' ~ candidateLastName }}</div>
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-12 mt-1">
+                            <div class="h6 mb-0 mr-3 font-weight-bold text-gray-800">{{ ratio }}%</div>
+                        </div>
+                        <div class="col-12 mt-1">
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-info"
+                                     role="progressbar"
+                                     style="width: {{ ratio }}%"
+                                     aria-valuenow="{{ ratio }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                ></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="avatar-container">
+                        <img id="user-avatar-img" width="40px" height="40px"
+                             src="{{ asset('uploads/avatars/' ~ candidateAvatar) }}" alt="user">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

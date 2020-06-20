@@ -1,3 +1,23 @@
+common:
+  id: "#"
+  access_denied: "Vous n'est pas autorisé à réaliser cette action"
+  actions: "Actions"
+  status:
+    active: "Activer"
+    inactive: "Désactiver"
+
+datatable:
+  length_menu: "Afficher _MENU_ par page"
+  search: "Rechercher :"
+  search_placeholder: "Rechercher ..."
+  zero_records: "Aucun élement à afficher"
+  info: "Affichage de la page _PAGE_ sur _PAGES_"
+  info_filtered: ""
+  paginate:
+    next: "Suivant"
+    previous: "Précédent"
+
+
 front:
   brand: "e-Elect"
   titles:
@@ -6,6 +26,9 @@ front:
   nav:
     home: "Accueil"
     login: "Connexion"
+    others: "Autres"
+    dashboard: "Espace personnel"
+    logout: "Déconnexion"
   header:
     text: "e-Elect, la plateforme qui vous permet de réaliser vos élections depuis chez vous en toute sécurité."
     slogan: "Simple, Rapide, Efficace et Sécurisé."
@@ -64,13 +87,25 @@ register:
   action: "Enregistrer mon compte"
 
 user:
+  id:
+    cell: "#"
+  status:
+    cell: "Statut"
+  role:
+    cell: "Autorisations"
+  avatar:
+    label: " "
+    placeholder: "Chosir un avatar"
   email:
+    cell: "Email"
     label: "Votre adresse email"
     placeholder: "Saisir votre adresse email"
   first_name:
+    cell: "Prénom"
     label: "Votre prénom"
     placeholder: "Saisir votre prénom"
   last_name:
+    cell: "Nom"
     label: "Votre nom"
     placeholder: "Saisir votre NOM"
   password:
@@ -79,12 +114,63 @@ user:
   password_confirmation:
     label: "Confirmez votre mot de passe"
     placeholder: "Confirmez votre mot de passe"
+election:
+  name:
+    cell: "Nom"
+    label: "Nom de l'éléction"
+    placeholder: "Saisir le nom de l'élection"
+  description:
+    cell: "Description"
+    label: "Description de l'éléction"
+    placeholder: "Saisir la description de l'élection"
+  start_date:
+    cell: "Date de début"
+    label: "Date de début de l'élection"
+    placeholder: "Selectionner la date de début de l'élection"
+  end_date:
+    cell: "Date de fin"
+    label: "Date de fin de l'élection"
+    placeholder: "Selectionner la date de fin de l'élection"
+  status:
+    cell: "Statut"
+    label: "Le statut de l'élection"
+    created: "Création"
+    pending: "En cours"
+    finished: "Términé"
+  application_count:
+    cell: "Candidatures"
+  actions:
+    add: "Ajouter l'élection"
+    update: "Soumettre et mette à jour l'élection"
 
 back:
   title: "e-Elect Dashboard"
   default:
     pages:
       heading: "Tableau de bord"
+      profile:
+        heading: "Edition de mon profil"
+        action: "Mette à jour mes informations"
+      elections:
+        show:
+          heading: "Détails d'une élection"
+          general_information: "Informations générales"
+          applications_list: "Liste des candidatures"
+        list:
+          heading: "Liste de toutes les élections"
+        pending:
+          heading: "Liste des élection en cours"
+        add:
+          heading: "Ajouter une nouvelle élection"
+        edit:
+          heading: "Mise de d'une élection"
+      users:
+        list:
+          heading: "Liste de tous les utilisateurs"
+        candidates:
+          heading: "Liste des candidats"
+        members:
+          heading: "Liste des membres"
     footer:
       copyright: "Copyright &copy; e-elect"
     logout:
@@ -119,7 +205,7 @@ back:
             title: "Gérer par rôle"
             items:
               members: "Liste des membres"
-              candidates: "Liste des candidats"
+              administrators: "Liste des administrateurs"
       vote:
         heading: "VOTES"
         label: "Gérer mes votes"
@@ -128,9 +214,9 @@ back:
           items:
             pending: "Votes en cours"
             history: "Historique des votes"
-      content:
-        heading: "CONDIDAT - PLAN D'ACTION -"
-        label: "Gérer le contenu"
+      applications:
+        heading: "CONDIDATURES - PLANS D'ACTION -"
+        label: "Gérer les candidatures"
       election:
         heading: "ELECTIONS"
         label: "Gérer les élections"
@@ -140,3 +226,4 @@ back:
             new: "Ajouter une élection"
             pending: "Élections en cours"
             history: "Historique des élections"
+

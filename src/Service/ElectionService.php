@@ -3,7 +3,6 @@
 
 namespace App\Service;
 
-
 use App\Entity\Election;
 use App\Repository\ElectionRepository;
 use Doctrine\ORM\EntityManagerInterface;

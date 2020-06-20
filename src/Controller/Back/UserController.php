@@ -29,7 +29,7 @@ class UserController extends AbstractController
     /**
      * @Route("/admin/users/all", name="back.users.list")
      */
-    public function all ()
+    public function all()
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -43,9 +43,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/users/candidates", name="back.users.candidates")
+     * @Route("/admin/users/members", name="back.users.members")
      */
-    public function candidates ()
+    public function members()
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -54,23 +54,23 @@ class UserController extends AbstractController
             'title' => 'back.default.pages.users.candidates.heading',
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
-            'users' => $this->userService->getUsersByRole(User::ROLE_CANDIDATE),
+            'users' => $this->userService->getUsersByRole(User::ROLE_MEMBER),
         ]);
     }
 
     /**
-     * @Route("/admin/users/members", name="back.users.members")
+     * @Route("/admin/users/administrators", name="back.users.administrators")
      */
-    public function members ()
+    public function administrators()
     {
         /** @var User $user */
         $user = $this->getUser();
 
         return $this->render('back-office/pages/users.html.twig', [
-            'title' => 'back.default.pages.users.members.heading',
+            'title' => 'back.default.pages.users.candidates.heading',
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
-            'users' => $this->userService->getUsersByRole(User::ROLE_MEMBER),
+            'users' => $this->userService->getUsersByRole(User::ROLE_ADMINISTRATOR),
         ]);
     }
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Service;
 
 use App\Entity\User;
@@ -70,7 +69,7 @@ class UserService
     public function getUserNotification(User $user): ?object
     {
         if (in_array(User::ROLE_ADMINISTRATOR, $user->getRoles())) {
-            return (object) [
+            return (object)[
                 'total' => 15,
                 'members' => 10,
                 'candidates' => 5,
@@ -88,11 +87,11 @@ class UserService
             ->setLastName($user->getLastName())
             ->setFirstName($user->getFirstName());
 
-        if($user->getPassword() !== null) {
+        if ($user->getPassword() !== null) {
             $userBdd->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
         }
 
-        if($user->getAvatar() !== null) {
+        if ($user->getAvatar() !== null) {
             $userBdd->setAvatar($this->fileUploader->uploadAvatar($user->getAvatar()));
         }
 
@@ -100,26 +99,25 @@ class UserService
         return $userBdd;
     }
 
-    public function getUsers (): array
+    public function getUsers(): array
     {
         return $this->userRepository->findAll();
     }
 
-    public function getUsersByStatus (bool $active): array
+    public function getUsersByStatus(bool $active): array
     {
         return $this->userRepository->findBy([
             'active' => $active
         ]);
     }
 
-    public function getUsersByRole (string $role): array
+    public function getUsersByRole(string $role): array
     {
         $queryBuilder = $this->userRepository->createQueryBuilder('user');
         $queryBuilder
             ->select('user')
             ->where('user.roles LIKE :role')
-            ->setParameter('role', '%'.$role.'%')
-        ;
+            ->setParameter('role', '%' . $role . '%');
         return $queryBuilder->getQuery()->getResult();
     }
 
@@ -131,8 +129,7 @@ class UserService
             ->set('user.active', ':active')
             ->where('user.id = :id')
             ->setParameter('active', $active)
-            ->setParameter('id', $userId)
-        ;
+            ->setParameter('id', $userId);
 
         $queryBuilder->getQuery()->execute();
     }

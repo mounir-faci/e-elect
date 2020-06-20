@@ -53,18 +53,19 @@ class Election
     private $endDate;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="election")
+     * @ORM\OneToMany(targetEntity=Application::class, mappedBy="election")
      */
-    private $votes;
+    private $applications;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $status;
 
+
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
+        $this->applications = new ArrayCollection();
         $this->status = self::STATUS_CREATED;
     }
 
@@ -121,37 +122,6 @@ class Election
         return $this;
     }
 
-    /**
-     * @return Collection|Vote[]
-     */
-    public function getVotes(): Collection
-    {
-        return $this->votes;
-    }
-
-    public function addVote(Vote $vote): self
-    {
-        if (!$this->votes->contains($vote)) {
-            $this->votes[] = $vote;
-            $vote->setElection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVote(Vote $vote): self
-    {
-        if ($this->votes->contains($vote)) {
-            $this->votes->removeElement($vote);
-            // set the owning side to null (unless already changed)
-            if ($vote->getElection() === $this) {
-                $vote->setElection(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -162,5 +132,45 @@ class Election
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->setElection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->contains($application)) {
+            $this->applications->removeElement($application);
+            // set the owning side to null (unless already changed)
+            if ($application->getElection() === $this) {
+                $application->setElection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTotalVotesCount (): int
+    {
+        return array_sum(
+            array_map(
+                function(Application $application) {
+                    return $application->getVotes()->count();
+                },
+                $this->getApplications()->getValues()
+            )
+        );
     }
 }

@@ -19,7 +19,17 @@
                 <nav class="site-navigation position-relative text-right" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                         <li class="active"><a href="{{ path('front.home') }}" class="nav-link">{{ 'front.nav.home' | trans }}</a></li>
+                        {% if not app.user %}
                         <li><a href="{{ path('login') }}" class="nav-link">{{ 'front.nav.login' | trans }}</a></li>
+                        {% else %}
+                            <li class="has-children">
+                                <a class="nav-link">{{ 'front.nav.others' | trans }}</a>
+                                <ul class="dropdown">
+                                    <li><a href="{{ path('back.dashboard') }}" class="nav-link">{{ 'front.nav.dashboard' | trans }}</a></li>
+                                    <li><a href="{{ path('logout') }}" class="nav-link">{{ 'front.nav.logout' | trans }}</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
