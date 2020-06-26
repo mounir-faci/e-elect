@@ -1,0 +1,38 @@
+{%  trans_default_domain 'translations' %}
+
+{% if user.isAdministrator %}
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
+        'hasChildren': true,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.applications.admin.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'layer-group',
+        'label': 'back.default.side_bar.applications.admin.label' | trans,
+        'children': [
+            {
+                'title': 'back.default.side_bar.applications.admin.group.title' | trans,
+                'items': [
+                {
+                    'action': path('back.user.application.list'),
+                    'label': 'back.default.side_bar.applications.admin.group.items.own' | trans
+                },
+                {
+                    'action': path('back.user.application.all'),
+                    'label': 'back.default.side_bar.applications.admin.group.items.history' | trans
+                }
+            ]
+            }
+        ]
+    } %}
+{% endif %}
+
+{% if user.isMember %}
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
+        'hasChildren': false,
+        'withDivider': false,
+        'heading': 'back.default.side_bar.applications.heading' | trans,
+        'action': path('back.user.application.list'),
+        'icon': 'layer-group',
+        'label': 'back.default.side_bar.applications.label' | trans
+    } %}
+{% endif %}

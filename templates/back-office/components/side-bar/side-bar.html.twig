@@ -18,38 +18,16 @@
 
     {# Manage votes #}
     {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
-        'hasChildren': true,
+        'hasChildren': false,
         'withDivider': true,
         'heading': 'back.default.side_bar.vote.heading' | trans,
-        'action': path('back.dashboard'),
+        'action': path('back.user.votes.history'),
         'icon': 'crown',
         'label': 'back.default.side_bar.vote.label' | trans,
-        'children': [
-            {
-                'title': 'back.default.side_bar.vote.group.title' | trans,
-                'items': [
-                {
-                    'action': path('back.dashboard'),
-                    'label': 'back.default.side_bar.vote.group.items.pending' | trans
-                },
-                {
-                    'action': path('back.dashboard'),
-                    'label': 'back.default.side_bar.vote.group.items.history' | trans
-                }
-            ]
-            }
-        ]
     } %}
 
     {# Manage application #}
-    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
-        'hasChildren': false,
-        'withDivider': user.isAdministrator,
-        'heading': 'back.default.side_bar.applications.heading' | trans,
-        'action': path('back.dashboard'),
-        'icon': 'layer-group',
-        'label': 'back.default.side_bar.applications.label' | trans
-    } %}
+    {% include 'back-office/components/side-bar/side-bar-menu-application.html.twig' %}
 
     {# Manage users #}
     {% if user.isAdministrator %}

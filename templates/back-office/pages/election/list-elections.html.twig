@@ -31,14 +31,14 @@
                                         <span class="badge badge-info bg_{{ election.status | lower }}">{{ election.status }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge badge-success">{{ election.totalVotesCount }}</span>
+                                        <span class="badge badge-success">{{ election.applications.count }}</span>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center m-0 p-0">
                                             <a class="d-block btn btn-sm btn-circle btn-info mr-3"
                                                href="{{ path('back.elections.show', {'election': election.id}) }}"
                                             >
-                                                <i class="fas fa-burn"></i>
+                                                <i class="fas fa-glasses" style="margin-left: -1.2px;"></i>
                                             </a>
                                             {% if user.administrator %}
                                                 <a class="d-block btn btn-sm btn-circle btn-primary mr-3"

@@ -2,11 +2,25 @@
 {% set candidateFirstName = candidateFirstName is defined ? candidateFirstName : '' %}
 {% set candidateLastName = candidateLastName is defined ? candidateLastName : '' %}
 {% set candidateAvatar =  candidateAvatar is defined ? candidateAvatar : 'avatar-default.png' %}
-{% set totalElectionVotes = totalElectionVotes is defined or totalElectionVotes == 0 ? totalElectionVotes : 1 %}
+{% set totalElectionVotes = totalElectionVotes is defined and totalElectionVotes != 0 ? totalElectionVotes : 1 %}
 {% set totalApplicationVotes = totalApplicationVotes is defined ? totalApplicationVotes : 0 %}
 {% set ratio = (totalApplicationVotes / totalElectionVotes * 100) | number_format(2) %}
 
-<a class="d-block text-decoration-none col-12 col-md-6 col-lg-4 col-xl-3 mb-4" href="{{ path('back.user.application', {'application': applicationId}) }}">
+{% block stylesheets %}
+    <style>
+        .avatar-container {
+            max-width: 62px;
+            max-height: 62px;
+            border-radius: 50%;
+            border: 1px solid #d0d0d0;
+        }
+        .avatar-container img {
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+
+<a class="d-block text-decoration-none col-12 col-md-6 col-lg-4 col-xl-3 mb-4" href="{{ path('back.user.application.show', {'application': applicationId}) }}">
     <div class="card border-left-info shadow h-100 py-2">
         <div class="card-body">
             <div class="row no-gutters align-items-center">

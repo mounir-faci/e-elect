@@ -139,6 +139,13 @@ class Election
         return $this->applications;
     }
 
+    public function setApplications(Collection $applications): self
+    {
+        $this->applications = $applications;
+
+        return $this;
+    }
+
     public function addApplication(Application $application): self
     {
         if (!$this->applications->contains($application)) {

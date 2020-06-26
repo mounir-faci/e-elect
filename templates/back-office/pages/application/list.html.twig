@@ -1,0 +1,134 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block content %}
+    <div class="card o-hidden border-0 shadow-lg">
+        <div class="card-body p-0">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="data-table" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th class="text-center">{{ 'common.id' | trans }}</th>
+                                <th>{{ 'application.election.cell' | trans }}</th>
+                                <th class="text-center">{{ 'application.votes.cell' | trans }}</th>
+                                <th class="text-center">{{ 'application.status.cell' | trans }}</th>
+                                {% if user.administrator %}
+                                    <th class="pl-0 pr-0 text-center">{{ 'common.validation' | trans }}</th>
+                                {% endif %}
+                                <th class="pl-0 pr-0 text-center">{{ 'common.actions' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {# @var application \App\Entity\Application #}
+                            {% for application in applications %}
+                                <tr>
+                                    <td class="text-center">{{ application.id }}</td>
+                                    <td>{{ application.election.name }}</td>
+                                    <td class="text-center"><span class="badge badge-info">{{ application.votes.count }}</span></td>
+                                    <td class="text-center"><span class="badge badge-info bg_{{ application.status | lower }}">{{ application.status }}</span></td>
+                                    {% if user.administrator %}
+                                        <td class="text-center">
+                                            {% set checked = application.status is constant('\\App\\Entity\\Application::STATUS_VALIDATED') ? 'checked' : '' %}
+                                            <form class="mx-auto" method="post"
+                                                  action="{{ path('back.application.status.change') }}">
+                                                <input type="hidden" name="csrf_token"
+                                                       value="{{ csrf_token('change_application_status') }}">
+                                                <input type="hidden" name="application" value="{{ application.id }}">
+                                                <label>
+                                                    <input id="toggle-{{ application.id }}"
+                                                           class="toggle-element"
+                                                           type="checkbox"
+                                                           name="status"
+                                                           data-toggle="toggle"
+                                                           data-size="xs"
+                                                           data-style="ios btn-sm"
+                                                           data-on="{{ 'common.status.reject' | trans }}"
+                                                           data-off="{{ 'common.status.validated' | trans }}"
+                                                           data-onstyle="danger"
+                                                           data-offstyle="success"
+                                                           {{ checked }}
+                                                    />
+                                                </label>
+                                            </form>
+                                        </td>
+                                    {% endif %}
+                                    <td class="pl-0 pr-0 text-center">
+                                        {% if application.candidate.id == user.id %}
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-sm btn-circle btn-primary" href="{{ path('back.user.application.edit', {'application': application.id}) }}">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+
+                                                <form class="ml-2 form-inline" method="post" action="{{ path('back.user.application.delete') }}">
+                                                    <input type="hidden" name="token" value="{{ csrf_token('user_application_delete') }}">
+                                                    <input type="hidden" name="application" value="{{ application.id }}"/>
+                                                    <button type="submit" class="btn btn-sm btn-circle btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        .bg_status_validated {background-color: #18aa75;}
+        .bg_status_rejected {background-color: #e74a3b;}
+        .bg_status_pending {background-color: #e1a712;}
+
+        thead th {
+            border-bottom: 0 !important;
+        }
+
+        .card-body {
+            font-size: 14px !important;
+        }
+        .toggle.ios, .toggle-on.ios, .toggle-off.ios, .toggle.ios .toggle-handle {
+            border-radius: 20rem;
+        }
+
+        .toggle label {
+            font-size: 14px !important;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#data-table").DataTable({
+                "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+                "language": {
+                    "lengthMenu": "{{ 'datatable.length_menu' | trans }}",
+                    "search": "{{ 'datatable.search' | trans }}",
+                    "searchPlaceholder": "{{ 'datatable.search_placeholder' | trans }}",
+                    "zeroRecords": "{{ 'datatable.zero_records' | trans }}",
+                    "info": "{{ 'datatable.info' | trans }}",
+                    "infoFiltered": "{{ 'datatable.info_filtered' | trans }}",
+                    "paginate": {
+                        "next": "{{ 'datatable.paginate.next' | trans }}",
+                        "previous": "{{ 'datatable.paginate.previous' | trans }}"
+                    }
+                }
+            });
+            let toggleElements = $('.toggle-element');
+            toggleElements.on('change', function () {
+                $(this).parent().parent().parent().submit()
+            });
+        });
+    </script>
+{% endblock %}
+

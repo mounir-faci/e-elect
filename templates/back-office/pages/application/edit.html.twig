@@ -1,0 +1,27 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-circle btn-primary float-right" data-container="body" data-toggle="popover"
+                data-placement="bottom" data-content="{{ 'back.default.pages.elections.show.send' | trans }}">
+            <i class="fas fa-save"></i>
+        </button>
+    </div>
+    <div style="clear: both;">
+        {{ form_row(form.content, {'attr': {'class': 'float-clear'}}) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                'trigger': 'hover'
+            });
+        });
+    </script>
+{% endblock %}

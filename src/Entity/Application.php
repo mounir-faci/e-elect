@@ -32,7 +32,7 @@ class Application
     private $election;
 
     /**
-     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="application")
+     * @ORM\OneToMany(targetEntity=Vote::class, mappedBy="application", cascade={"persist", "remove"})
      */
     private $votes;
 

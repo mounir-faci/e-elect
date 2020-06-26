@@ -1,36 +1,42 @@
 {%  trans_default_domain 'translations' %}
-{% set childrenItems = [
-    {
-        'action': path('back.elections.pending'),
-        'label': 'back.default.side_bar.election.group.items.pending' | trans
-    },
-    {
-        'action': path('back.elections.all'),
-        'label': 'back.default.side_bar.election.group.items.history' | trans
-    }
-] %}
 
 {% if user.isAdministrator %}
-    {% set adminItems = [
-        {
-            'action': path('back.elections.add'),
-            'label': 'back.default.side_bar.election.group.items.new' | trans
-        }
-    ] %}
-    {% set childrenItems =  adminItems | merge(childrenItems) %}
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
+        'hasChildren': true,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.election.heading' | trans,
+        'action': path('back.dashboard'),
+        'icon': 'medal',
+        'label': 'back.default.side_bar.election.label' | trans,
+        'children': [
+            {
+                'title': 'back.default.side_bar.election.group.title' | trans,
+                'items': [
+                {
+                    'action': path('back.elections.add'),
+                    'label': 'back.default.side_bar.election.group.items.new' | trans
+                },
+                {
+                    'action': path('back.elections.pending'),
+                    'label': 'back.default.side_bar.election.group.items.pending' | trans
+                },
+                {
+                    'action': path('back.elections.all'),
+                    'label': 'back.default.side_bar.election.group.items.history' | trans
+                }
+            ]
+            }
+        ]
+    } %}
 {% endif %}
 
-{% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
-    'hasChildren': true,
-    'withDivider': true,
-    'heading': 'back.default.side_bar.election.heading' | trans,
-    'action': path('back.dashboard'),
-    'icon': 'medal',
-    'label': 'back.default.side_bar.election.label' | trans,
-    'children': [
-        {
-            'title': 'back.default.side_bar.election.group.title' | trans,
-            'items': childrenItems
-        }
-    ]
-} %}
+{% if user.isMember %}
+    {% include 'back-office/components/side-bar/side-bar-item.html.twig' with {
+        'hasChildren': false,
+        'withDivider': true,
+        'heading': 'back.default.side_bar.election.heading' | trans,
+        'action': path('back.elections.pending'),
+        'icon': 'medal',
+        'label': 'back.default.side_bar.election.group.items.pending' | trans
+    } %}
+{% endif %}

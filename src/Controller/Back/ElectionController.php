@@ -2,8 +2,10 @@
 
 namespace App\Controller\Back;
 
+use App\Entity\Application;
 use App\Entity\Election;
 use App\Entity\User;
+use App\Entity\Vote;
 use App\Form\ElectionType;
 use App\Service\ElectionService;
 use App\Service\UserService;
@@ -46,6 +48,53 @@ class ElectionController extends AbstractController
 
     /**
      * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
+     * @Route("user/elections/show/{election}", name="back.elections.show", methods={"GET"})
+     * @param Election $election
+     * @return Response
+     */
+    public function show(Election $election): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $currentUserApplications = array_filter(
+            $user->getApplications()->getValues(),
+            function (Application $application) use ($user) {
+                return $application->getCandidate()->getId() === $user->getId();
+            }
+        );
+
+        // filter the applications -> avoid current user application
+        $applications =  $election->getApplications()->filter(function (Application $application) use ($user) {
+            return ($application->getCandidate()->getId() !== $user->getId() && $application->getStatus() === Application::STATUS_VALIDATED);
+        });
+
+        // did current user vote for this election
+        $currentUserAlreadyVoted = array_filter(
+            $election->getApplications()->getValues(),
+            function (Application $application) use ($user) {
+                return $application->getVotes()->filter(
+                    function(Vote $vote) use ($user) {
+                        return ($vote->getVoter()->getId() === $user->getId());
+                    }
+                );
+            }
+        );
+
+        $election->setApplications($applications);
+
+        return $this->render('back-office/pages/election/show-election.html.twig', [
+            'title' => 'back.default.pages.elections.show.heading',
+            'user' => $user,
+            'notification' => $this->userService->getUserNotification($user),
+            'election' => $election,
+            'currentUserIsCandidate' => (count($currentUserApplications) > 0),
+            'currentUserAlreadyVoted' => (count($currentUserAlreadyVoted) > 0),
+        ]);
+    }
+
+    /**
+     * @Security("is_granted('ROLE_ADMINISTRATOR')")
      * @Route("user/elections/all", name="back.elections.all", methods={"GET"})
      */
     public function all(): Response
@@ -58,25 +107,6 @@ class ElectionController extends AbstractController
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
             'elections' => $this->electionService->getElections(),
-        ]);
-    }
-
-    /**
-     * @Security("is_granted('ROLE_ADMINISTRATOR') or is_granted('ROLE_MEMBER')")
-     * @Route("user/elections/show/{election}", name="back.elections.show", methods={"GET"})
-     * @param Election $election
-     * @return Response
-     */
-    public function show(Election $election): Response
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        return $this->render('back-office/pages/election/show-election.html.twig', [
-            'title' => 'back.default.pages.elections.show.heading',
-            'user' => $user,
-            'notification' => $this->userService->getUserNotification($user),
-            'election' => $election,
         ]);
     }
 

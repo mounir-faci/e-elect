@@ -1,0 +1,55 @@
+{% extends 'back-office/shared/layout.html.twig' %}
+{% trans_default_domain 'translations' %}
+
+{% block content %}
+    {% set modalId = 'vote' %}
+    {% include 'back-office/components/vote-modal.html.twig' with {'modalId': modalId, 'applicationId': application.id} %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="d-flex">
+                <div class="avatar-container mr-2">
+                    <img id="user-avatar-img" width="40px" height="40px"
+                         src="{{ asset('uploads/avatars/' ~ application.candidate.avatar) }}" alt="user">
+                </div>
+                <h6 class="mt-3 font-weight-bold text-primary">{{ application.candidate.firstName ~ ' ' ~ application.candidate.lastName }}</h6>
+            </div>
+
+            <h6 class="m-0 font-weight-bold text-primary" style="margin-left: -65px !important;">{{ 'back.default.pages.vote.title' | trans | upper }}</h6>
+
+            <div class="dropdown no-arrow">
+                {% if not currentUserIsTheCandidate and not currentUserAlreadyVoted %}
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                     aria-labelledby="dropdownMenuLink">
+                    <button class="dropdown-item" data-toggle="modal" data-target="#voteModal">
+                        <i class="fas fa-check mr-2"></i>{{ 'back.default.pages.vote.action' | trans }}
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="card-body">
+            {{ application.content | raw }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .avatar-container {
+            max-width: 42px;
+            max-height: 42px;
+            border-radius: 50%;
+            border: 1px solid #d0d0d0;
+        }
+
+        .avatar-container img {
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}

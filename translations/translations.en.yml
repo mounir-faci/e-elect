@@ -142,7 +142,18 @@ election:
   actions:
     add: "Ajouter l'élection"
     update: "Soumettre et mette à jour l'élection"
-
+application:
+  election:
+    cell: "Election"
+  votes:
+    cell: "Nombre des votes"
+vote:
+  election:
+    cell: "Election"
+  candidate:
+    cell: "Candidat de l'élection"
+  date:
+    cell: "Date du vote"
 back:
   title: "e-Elect Dashboard"
   default:
@@ -155,7 +166,12 @@ back:
         show:
           heading: "Détails d'une élection"
           general_information: "Informations générales"
+          already_candidate: "Vous êtes candidat à cette élection"
+          already_voted: "Vous avez déjà attributé votre voix pour cette élection"
           applications_list: "Liste des candidatures"
+          no_application: "Aucune candidature pour cette élection pour le moment"
+          send_application: "Envoyer ma candidature"
+          send: "Envoyer"
         list:
           heading: "Liste de toutes les élections"
         pending:
@@ -164,6 +180,21 @@ back:
           heading: "Ajouter une nouvelle élection"
         edit:
           heading: "Mise de d'une élection"
+      application:
+        heading: "PLAN D'ACTION : Saisie de votre contentu"
+      applications:
+        heading: "Liste de mes candidatures"
+      vote:
+        heading: ""
+        title: "PLAN D'ACTION"
+        action: "Voter sur ce candidat"
+        modal:
+          title: "Confirmation du vote"
+          text: "Voulez-vous vraiment confirmer votre vote . Sachez qu'une fois confirmer votre action est irréversible, Veuillez donc vous assurer avant d'appuyer sur Vlider"
+          submit: "Valider"
+          cancel: "Annuler"
+      votes:
+        heading: "Liste des mes votes"
       users:
         list:
           heading: "Liste de tous les utilisateurs"
@@ -208,15 +239,19 @@ back:
               administrators: "Liste des administrateurs"
       vote:
         heading: "VOTES"
-        label: "Gérer mes votes"
-        group:
-          title: "Géstion des votes"
-          items:
-            pending: "Votes en cours"
-            history: "Historique des votes"
+        label: "Historique de mes votes"
       applications:
         heading: "CONDIDATURES - PLANS D'ACTION -"
-        label: "Gérer les candidatures"
+        label: "Gérer mes candidatures"
+        admin:
+          heading: "GESTION DES CANDIDATURES"
+          label: "Gérer les candidatures"
+          group:
+            title: "Gestion des candidatures"
+            items:
+              own: "Gérer mes candidatures"
+              pending: "Candidatures en cours"
+              history: "Historique des candidatures"
       election:
         heading: "ELECTIONS"
         label: "Gérer les élections"
