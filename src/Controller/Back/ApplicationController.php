@@ -46,7 +46,7 @@ class ApplicationController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('back-office/pages/application/list.html.twig', [
-            'title' => 'back.default.pages.applications.heading',
+            'title' => 'back.default.pages.applications.own.heading',
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
             'applications' => $user->getApplications(),
@@ -198,7 +198,7 @@ class ApplicationController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('back-office/pages/application/list.html.twig', [
-            'title' => 'back.default.pages.applications.heading',
+            'title' => 'back.default.pages.applications.all.heading',
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
             'applications' => $applicationService->getApplications(),

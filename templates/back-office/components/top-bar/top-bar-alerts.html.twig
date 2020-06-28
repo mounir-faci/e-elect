@@ -2,7 +2,7 @@
 
 {% set total = total is defined ? total : 0 %}
 {% set members = members is defined ? members : 0 %}
-{% set candidates = candidates is defined ? candidates : 0 %}
+{% set applications = applications is defined ? applications : 0 %}
 
 {% if total > 0 %}
     <li class="nav-item dropdown no-arrow mx-1">
@@ -21,15 +21,11 @@
             } %}
 
             {% include 'back-office/components/top-bar/top-bar-alert-item.html.twig' with {
-                'action': path('back.alerts.candidates'),
+                'action': path('back.alerts.applications'),
                 'icon': 'user-graduate',
                 'iconBackground': 'gradient-info',
-                'text': 'back.default.top_bar.alerts.candidates' | trans({'%count%': candidates})
+                'text': 'back.default.top_bar.alerts.applications' | trans({'%count%': applications})
             } %}
-
-            <a class="dropdown-item text-center small text-gray-500" href="{{ path('back.alerts.all') }}">
-                {{ 'back.default.top_bar.alerts.show_all' | trans }}
-            </a>
         </div>
     </li>
 

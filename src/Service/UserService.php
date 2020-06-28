@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Application;
 use App\Entity\User;
 use App\Security\LoginFormAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,11 +19,12 @@ class UserService
     private $passwordEncoder;
     private $guardHandler;
     private $formAuthenticator;
+    private $applicationService;
 
 
     public function __construct(
         EntityManagerInterface $entityManager, FileUploader $fileUploader, UserPasswordEncoderInterface $encoder,
-        GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator)
+        GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator, ApplicationService $applicationService)
     {
         $this->entityManager = $entityManager;
         $this->userRepository = $entityManager->getRepository(User::class);
@@ -30,6 +32,7 @@ class UserService
         $this->passwordEncoder = $encoder;
         $this->guardHandler = $guardHandler;
         $this->formAuthenticator = $formAuthenticator;
+        $this->applicationService = $applicationService;
     }
 
     public function authenticateUser(Request $request, UserInterface $user)
@@ -69,10 +72,18 @@ class UserService
     public function getUserNotification(User $user): ?object
     {
         if (in_array(User::ROLE_ADMINISTRATOR, $user->getRoles())) {
+            $pendingUsers = count($this->userRepository->findBy([
+                'active' => false
+            ]));
+
+            $pendingApplications = count(
+                $this->applicationService->getApplications(Application::STATUS_PENDING)
+            );
+
             return (object)[
-                'total' => 15,
-                'members' => 10,
-                'candidates' => 5,
+                'total' => ($pendingUsers + $pendingApplications),
+                'members' => $pendingUsers,
+                'applications' => $pendingApplications,
             ];
         }
 

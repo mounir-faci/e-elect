@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Application
 {
+    public const STATUS_VALIDATED = 'STATUS_VALIDATED';
+    public const STATUS_PENDING = 'STATUS_PENDING';
+    public const STATUS_REJECTED = 'STATUS_REJECTED';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -41,9 +45,15 @@ class Application
      */
     private $content;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->votes = new ArrayCollection();
+        $this->status = self::STATUS_PENDING;
     }
 
     public function getId(): ?int
@@ -115,6 +125,17 @@ class Application
     {
         $this->content = $content;
 
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): Application
+    {
+        $this->status = $status;
         return $this;
     }
 }

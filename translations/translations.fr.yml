@@ -219,8 +219,8 @@ back:
       alerts:
         title: "Centre d'aletes"
         show_all: "Afficher toutes les alertes"
-        candidates: "Des nouveaux candidats sont en attente de validation <span class='badge badge-danger'>%count%</span>"
-        members: "Des nouveaux membres sont en attente de validation <span class='badge badge-danger'>%count%</span> "
+        applications: "Des candidatures sont en attente de validation <span class='badge badge-danger'>%count%</span>"
+        members: "Des membres sont en attente d'activation <span class='badge badge-danger'>%count%</span> "
       user:
         dropdown:
           profile: "Mon profil"

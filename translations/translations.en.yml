@@ -2,9 +2,12 @@ common:
   id: "#"
   access_denied: "Vous n'est pas autorisé à réaliser cette action"
   actions: "Actions"
+  validation: "Validation"
   status:
     active: "Activer"
     inactive: "Désactiver"
+    validated: "Valider"
+    reject: "Rejeter"
 
 datatable:
   length_menu: "Afficher _MENU_ par page"
@@ -147,6 +150,8 @@ application:
     cell: "Election"
   votes:
     cell: "Nombre des votes"
+  status:
+    cell: "Statut"
 vote:
   election:
     cell: "Election"
@@ -183,7 +188,10 @@ back:
       application:
         heading: "PLAN D'ACTION : Saisie de votre contentu"
       applications:
-        heading: "Liste de mes candidatures"
+        own:
+          heading: "Liste de mes candidatures"
+        all:
+          heading: "Liste de toutes les candidatures"
       vote:
         heading: ""
         title: "PLAN D'ACTION"
@@ -214,8 +222,8 @@ back:
       alerts:
         title: "Centre d'aletes"
         show_all: "Afficher toutes les alertes"
-        candidates: "Des nouveaux candidats sont en attente de validation <span class='badge badge-danger'>%count%</span>"
-        members: "Des nouveaux membres sont en attente de validation <span class='badge badge-danger'>%count%</span> "
+        applications: "Des candidatures sont en attente de validation <span class='badge badge-danger'>%count%</span>"
+        members: "Des membres sont en attente d'activation <span class='badge badge-danger'>%count%</span> "
       user:
         dropdown:
           profile: "Mon profil"
@@ -249,9 +257,8 @@ back:
           group:
             title: "Gestion des candidatures"
             items:
-              own: "Gérer mes candidatures"
-              pending: "Candidatures en cours"
-              history: "Historique des candidatures"
+              own: "Mes candidatures"
+              history: "Toutes les candidatures"
       election:
         heading: "ELECTIONS"
         label: "Gérer les élections"
