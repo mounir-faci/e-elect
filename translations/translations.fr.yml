@@ -9,6 +9,9 @@ common:
     validated: "Valider"
     reject: "Rejeter"
 
+exceptions:
+  user_disabled: "Votre compte n'a pas encore été activé ou a été désactivé !"
+
 datatable:
   length_menu: "Afficher _MENU_ par page"
   search: "Rechercher :"
