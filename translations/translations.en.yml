@@ -191,7 +191,10 @@ back:
       application:
         heading: "PLAN D'ACTION : Saisie de votre contentu"
       applications:
-        heading: "Liste de mes candidatures"
+        own:
+          heading: "Liste de mes candidatures"
+        all:
+          heading: "Liste de toutes les candidatures"
       vote:
         heading: ""
         title: "PLAN D'ACTION"
