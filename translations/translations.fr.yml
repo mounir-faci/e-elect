@@ -207,6 +207,20 @@ back:
           heading: "Liste des candidats"
         members:
           heading: "Liste des membres"
+      statistics:
+        specific:
+          title: "Statistiques spécifiques"
+          elections: "Elections en cours"
+          applications: "Mes candidatures"
+          votes:
+            sent: "Votes émis"
+            received: "Votes reçus"
+        global:
+          title: "Statistiques globales"
+          elections: "Nombre d'élections"
+          applications: "Nombre de candidatures"
+          users: "Nombre d'utilisateurs"
+          votes: "Nombre de votes"
     footer:
       copyright: "Copyright &copy; e-elect"
     logout:

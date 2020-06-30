@@ -3,6 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\User;
+use App\Service\StatisticService;
 use App\Service\UserService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     private $userService;
+    private $statisticService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, StatisticService $statisticService)
     {
         $this->userService = $userService;
+        $this->statisticService = $statisticService;
     }
 
     /**
@@ -29,6 +32,7 @@ class DashboardController extends AbstractController
         return $this->render('back-office/pages/dashboard.html.twig', [
             'user' => $user,
             'notification' => $this->userService->getUserNotification($user),
+            'statistics' => $this->statisticService->getStatistics($user),
         ]);
     }
 }
