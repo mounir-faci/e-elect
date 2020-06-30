@@ -40,3 +40,29 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $("#data-table").DataTable({
+                "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+                "language": {
+                    "lengthMenu": "{{ 'datatable.length_menu' | trans }}",
+                    "search": "{{ 'datatable.search' | trans }}",
+                    "searchPlaceholder": "{{ 'datatable.search_placeholder' | trans }}",
+                    "zeroRecords": "{{ 'datatable.zero_records' | trans }}",
+                    "info": "{{ 'datatable.info' | trans }}",
+                    "infoFiltered": "{{ 'datatable.info_filtered' | trans }}",
+                    "paginate": {
+                        "next": "{{ 'datatable.paginate.next' | trans }}",
+                        "previous": "{{ 'datatable.paginate.previous' | trans }}"
+                    }
+                }
+            });
+            let toggleElements = $('.toggle-element');
+            toggleElements.on('change', function () {
+                $(this).parent().parent().parent().submit()
+            });
+        });
+    </script>
+{% endblock %}
