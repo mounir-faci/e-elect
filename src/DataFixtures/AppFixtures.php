@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
         for ($cpt = 0; $cpt < 20; $cpt++) {
             $election = new Election();
             $election
-                ->setName($this->faker->title)
+                ->setName($this->faker->text)
                 ->setDescription($this->faker->realText( 800, 4))
                 ->setStartDate($this->faker->dateTime)
                 ->setEndDate($this->faker->dateTime)
@@ -121,7 +121,7 @@ class AppFixtures extends Fixture
         for ($cpt = 0; $cpt < 10; $cpt++) {
             $election = new Election();
             $election
-                ->setName($this->faker->title)
+                ->setName($this->faker->text)
                 ->setDescription($this->faker->realText( 800, 4))
                 ->setStartDate($this->faker->dateTime)
                 ->setEndDate($this->faker->dateTime)
@@ -169,7 +169,7 @@ class AppFixtures extends Fixture
                 ->setVoteDate($this->faker->dateTime)
             ;
 
-            if ($cpt % 20) {
+            if (($cpt%20) === 0) {
                 $vote->setVoter($admin);
             }
 
